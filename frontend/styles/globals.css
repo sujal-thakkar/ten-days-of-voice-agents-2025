@@ -5,71 +5,73 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Blue Tokai Theme - Light Mode */
+  --background: #fdfbf7; /* Creamy white */
+  --foreground: #1a2e35; /* Dark teal/black */
+  --card: #ffffff;
+  --card-foreground: #1a2e35;
+  --popover: #ffffff;
+  --popover-foreground: #1a2e35;
+  --primary: #005c7b; /* Blue Tokai Teal */
+  --primary-foreground: #ffffff;
+  --secondary: #f0f4f5;
+  --secondary-foreground: #005c7b;
+  --muted: #e8ecee;
+  --muted-foreground: #64748b;
+  --accent: #d4e4e8;
+  --accent-foreground: #005c7b;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: #dce5e8;
+  --input: #dce5e8;
+  --ring: #005c7b;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #fdfbf7;
+  --sidebar-foreground: #1a2e35;
+  --sidebar-primary: #005c7b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f4f5;
+  --sidebar-accent-foreground: #005c7b;
+  --sidebar-border: #dce5e8;
+  --sidebar-ring: #005c7b;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.269 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
+  /* Blue Tokai Theme - Dark Mode (Inverted) */
+  --background: #0f1a1e;
+  --foreground: #fdfbf7;
+  --card: #16242a;
+  --card-foreground: #fdfbf7;
+  --popover: #16242a;
+  --popover-foreground: #fdfbf7;
+  --primary: #007ea8; /* Lighter teal for dark mode */
+  --primary-foreground: #ffffff;
+  --secondary: #1e323a;
+  --secondary-foreground: #ffffff;
+  --muted: #1e323a;
+  --muted-foreground: #94a3b8;
+  --accent: #1e323a;
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.396 0.141 25.723);
+  --border: #2a424d;
+  --input: #2a424d;
+  --ring: #007ea8;
+  --chart-1: oklch(0.488 0.243 26.437);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.439 0 0);
+  --sidebar: #0f1a1e;
+  --sidebar-foreground: #fdfbf7;
+  --sidebar-primary: #007ea8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e323a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #2a424d;
+  --sidebar-ring: #007ea8;
 }
 
 @theme inline {

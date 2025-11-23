@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import type { AppConfig } from '@/app-config';
 import { ChatTranscript } from '@/components/app/chat-transcript';
+import { OrderPanel } from '@/components/app/order-panel';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
 import { TileLayout } from '@/components/app/tile-layout';
 import {
@@ -13,6 +14,7 @@ import {
 import { useChatMessages } from '@/hooks/useChatMessages';
 import { useConnectionTimeout } from '@/hooks/useConnectionTimout';
 import { useDebugMode } from '@/hooks/useDebug';
+import { useSession } from './session-provider';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '../livekit/scroll-area/scroll-area';
 
@@ -36,7 +38,7 @@ const BOTTOM_VIEW_MOTION_PROPS = {
   transition: {
     duration: 0.3,
     delay: 0.5,
-    ease: 'easeOut',
+    ease: [0.16, 1, 0.3, 1] as const,
   },
 };
 
@@ -68,6 +70,7 @@ export const SessionView = ({
 }: React.ComponentProps<'section'> & SessionViewProps) => {
   useConnectionTimeout(200_000);
   useDebugMode({ enabled: IN_DEVELOPMENT });
+  const { isSessionActive } = useSession();
 
   const messages = useChatMessages();
   const [chatOpen, setChatOpen] = useState(false);
@@ -92,6 +95,7 @@ export const SessionView = ({
 
   return (
     <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
+      <OrderPanel active={isSessionActive} className="fixed right-4 top-4 z-40 w-72 md:w-80" />
       {/* Chat Transcript */}
       <div
         className={cn(
