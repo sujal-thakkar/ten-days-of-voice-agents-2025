@@ -261,6 +261,10 @@ async def entrypoint(ctx: JobContext):
         ),
     )
 
+    # Initialize empty order on disk so frontend clears the old one
+    initial_order = session.userdata.order
+    await asyncio.to_thread(session.userdata.order_store.save, initial_order)
+
     # Join the room and connect to the user
     await ctx.connect()
 

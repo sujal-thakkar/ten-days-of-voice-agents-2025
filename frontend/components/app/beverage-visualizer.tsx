@@ -86,7 +86,7 @@ export const BeverageVisualizer = memo(({ order, className }: BeverageVisualizer
             }}
           >
              {/* Ice cubes if cold */}
-             {(order.drinkType.toLowerCase().includes('iced') || order.drinkType.toLowerCase().includes('cold')) && (
+             {(order.drinkType?.toLowerCase().includes('iced') || order.drinkType?.toLowerCase().includes('cold')) && (
                 <div className="absolute inset-0 opacity-30">
                   <div className="absolute left-4 top-8 h-6 w-6 rotate-12 rounded bg-white/40" />
                   <div className="absolute right-6 top-12 h-5 w-5 -rotate-6 rounded bg-white/40" />

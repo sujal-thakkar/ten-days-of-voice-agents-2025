@@ -70,6 +70,9 @@ export function ChatTranscript({
             return (
               <MotionChatEntry
                 key={id}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
                 locale={locale}
                 timestamp={timestamp}
                 message={message}

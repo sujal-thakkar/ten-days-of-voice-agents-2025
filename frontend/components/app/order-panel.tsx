@@ -29,7 +29,9 @@ export function OrderPanel({ active, className }: OrderPanelProps) {
     return order.extras.join(', ');
   }, [order]);
 
-  if (!order && !error) {
+  const isEmpty = !order?.drinkType && !order?.size && !order?.milk && (!order?.extras || order.extras.length === 0) && !order?.name;
+
+  if ((!order || isEmpty) && !error) {
     return null;
   }
 
