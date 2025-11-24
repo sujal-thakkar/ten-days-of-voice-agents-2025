@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import type { AppConfig } from '@/app-config';
 import { ChatTranscript } from '@/components/app/chat-transcript';
-import { OrderPanel } from '@/components/app/order-panel';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
 import { TileLayout } from '@/components/app/tile-layout';
 import {
@@ -95,7 +94,6 @@ export const SessionView = ({
 
   return (
     <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
-      <OrderPanel active={isSessionActive} className="fixed right-4 top-4 z-40 w-72 md:w-80" />
       {/* Chat Transcript */}
       <div
         className={cn(

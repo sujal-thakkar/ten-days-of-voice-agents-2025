@@ -12,7 +12,10 @@ dependencies = [
     "livekit-agents[assemblyai,deepgram,google,silero,turn-detector]~=1.2",
     "livekit-murf>=0.1.0",
     "livekit-plugins-noise-cancellation~=0.2",
+    "notion-client>=2.7.0",
     "python-dotenv",
+    "todoist-api-python>=3.1.0",
+    "tzdata>=2025.2",
 ]
 
 [dependency-groups]
