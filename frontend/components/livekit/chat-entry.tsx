@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-export interface ChatEntryProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface ChatEntryProps extends React.HTMLAttributes<HTMLDivElement> {
   /** The locale to use for the timestamp. */
   locale: string;
   /** The timestamp of the message. */
@@ -30,7 +30,7 @@ export const ChatEntry = ({
   const title = time.toLocaleTimeString(locale, { timeStyle: 'full' });
 
   return (
-    <li
+    <div
       title={title}
       data-lk-message-origin={messageOrigin}
       className={cn('group flex w-full flex-col gap-0.5', className)}
@@ -56,6 +56,6 @@ export const ChatEntry = ({
       >
         {message}
       </span>
-    </li>
+    </div>
   );
 };

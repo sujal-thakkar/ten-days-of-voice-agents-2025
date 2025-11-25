@@ -46,13 +46,7 @@ interface ThemeToggleProps {
 }
 
 export function ApplyThemeScript() {
-  return (
-    <script 
-      id="theme-script" 
-      suppressHydrationWarning 
-      dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} 
-    />
-  );
+  return <script id="theme-script">{THEME_SCRIPT}</script>;
 }
 
 export function ThemeToggle({ className }: ThemeToggleProps) {

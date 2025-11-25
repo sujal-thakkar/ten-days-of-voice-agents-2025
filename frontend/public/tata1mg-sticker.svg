@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.2"/>
+    </filter>
+    <linearGradient id="tata1mg-gradient" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF8A7A"/>
+      <stop offset="1" stop-color="#FE6F61"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- White Sticker Border -->
+  <circle cx="100" cy="100" r="92" fill="white" filter="url(#shadow)"/>
+  
+  <!-- Inner Orange-Red Circle -->
+  <circle cx="100" cy="100" r="84" fill="url(#tata1mg-gradient)"/>
+  
+  <!-- Medical Cross -->
+  <path d="M100 50V150M50 100H150" stroke="white" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Plus Sign Detail (smaller) -->
+  <circle cx="70" cy="70" r="8" fill="white" opacity="0.6"/>
+  <circle cx="130" cy="130" r="8" fill="white" opacity="0.6"/>
+  
+  <!-- Gloss Effect -->
+  <path d="M100 16C52.4 16 14 54.4 14 102C14 108 14.6 114 15.8 120C22 75 62 42 100 42C138 42 178 75 184.2 120C185.4 114 186 108 186 102C186 54.4 147.6 16 100 16Z" fill="white" fill-opacity="0.15"/>
+</svg>

@@ -1,7 +1,10 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    /* Allow importing shared assets from the monorepo root */
+    externalDir: true,
+  },
 };
 
 export default nextConfig;

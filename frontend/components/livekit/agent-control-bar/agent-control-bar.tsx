@@ -89,7 +89,7 @@ export function AgentControlBar({
     <div
       aria-label="Voice assistant controls"
       className={cn(
-        'bg-background border-input/50 dark:border-muted flex flex-col rounded-[31px] border p-3 drop-shadow-md/3',
+        'bg-neutral-900/90 border border-white/10 backdrop-blur-xl flex flex-col rounded-full p-2 shadow-2xl',
         className
       )}
       {...props}
@@ -103,8 +103,8 @@ export function AgentControlBar({
         />
       )}
 
-      <div className="flex gap-1">
-        <div className="flex grow gap-1">
+      <div className="flex items-center gap-2">
+        <div className="flex grow items-center gap-2 justify-center">
           {/* Toggle Microphone */}
           {visibleControls.microphone && (
             <TrackSelector
@@ -117,6 +117,7 @@ export function AgentControlBar({
               onPressedChange={microphoneToggle.toggle}
               onMediaDeviceError={handleMicrophoneDeviceSelectError}
               onActiveDeviceChange={handleAudioDeviceChange}
+              className="[&_button]:h-12 [&_button]:w-12 [&_button]:rounded-full [&_button]:bg-neutral-800 [&_button]:text-neutral-400 [&_button]:border [&_button]:border-white/5 [&_button:hover]:bg-neutral-700 [&_button:hover]:text-white [&_button[data-state=on]]:bg-red-600 [&_button[data-state=on]]:text-white [&_button[data-state=on]]:border-red-500 [&_button[data-state=on]]:shadow-[0_0_15px_rgba(220,38,38,0.5)]"
             />
           )}
 
@@ -132,6 +133,7 @@ export function AgentControlBar({
               onPressedChange={cameraToggle.toggle}
               onMediaDeviceError={handleCameraDeviceSelectError}
               onActiveDeviceChange={handleVideoDeviceChange}
+              className="[&_button]:h-12 [&_button]:w-12 [&_button]:rounded-full [&_button]:bg-neutral-800 [&_button]:text-neutral-400 [&_button]:border [&_button]:border-white/5 [&_button:hover]:bg-neutral-700 [&_button:hover]:text-white [&_button[data-state=on]]:bg-red-600 [&_button[data-state=on]]:text-white [&_button[data-state=on]]:border-red-500 [&_button[data-state=on]]:shadow-[0_0_15px_rgba(220,38,38,0.5)]"
             />
           )}
 
@@ -145,6 +147,7 @@ export function AgentControlBar({
               pressed={screenShareToggle.enabled}
               disabled={screenShareToggle.pending}
               onPressedChange={screenShareToggle.toggle}
+              className="h-12 w-12 rounded-full bg-neutral-800 text-neutral-400 border border-white/5 hover:bg-neutral-700 hover:text-white data-[state=on]:bg-red-600 data-[state=on]:text-white data-[state=on]:border-red-500 data-[state=on]:shadow-[0_0_15px_rgba(220,38,38,0.5)]"
             />
           )}
 
@@ -155,6 +158,7 @@ export function AgentControlBar({
             aria-label="Toggle transcript"
             pressed={chatOpen}
             onPressedChange={handleToggleTranscript}
+            className="h-12 w-12 rounded-full bg-neutral-800 text-neutral-400 border border-white/5 hover:bg-neutral-700 hover:text-white data-[state=on]:bg-red-600 data-[state=on]:text-white data-[state=on]:border-red-500 data-[state=on]:shadow-[0_0_15px_rgba(220,38,38,0.5)]"
           >
             <ChatTextIcon weight="bold" />
           </Toggle>
@@ -166,10 +170,10 @@ export function AgentControlBar({
             variant="destructive"
             onClick={handleDisconnect}
             disabled={!isSessionActive}
-            className="font-mono"
+            className="h-12 px-6 rounded-full font-bold tracking-wider bg-red-950/50 text-red-500 border border-red-900/50 hover:bg-red-900/80 hover:text-white hover:border-red-500 transition-all"
           >
-            <PhoneDisconnectIcon weight="bold" />
-            <span className="hidden md:inline">END CALL</span>
+            <PhoneDisconnectIcon weight="bold" className="mr-2" />
+            <span className="hidden md:inline">END SESSION</span>
             <span className="inline md:hidden">END</span>
           </Button>
         )}

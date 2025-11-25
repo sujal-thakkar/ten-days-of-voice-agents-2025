@@ -1,12 +1,12 @@
-import { Public_Sans } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import localFont from 'next/font/local';
 import { headers } from 'next/headers';
 import { ApplyThemeScript, ThemeToggle } from '@/components/app/theme-toggle';
 import { cn, getAppConfig, getStyles } from '@/lib/utils';
 import '@/styles/globals.css';
 
-const publicSans = Public_Sans({
-  variable: '--font-public-sans',
+const montserrat = Montserrat({
+  variable: '--font-montserrat',
   subsets: ['latin'],
 });
 
@@ -52,18 +52,13 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       lang="en"
       suppressHydrationWarning
       className={cn(
-        publicSans.variable,
+        montserrat.variable,
         commitMono.variable,
         'scroll-smooth font-sans antialiased'
       )}
     >
       <head>
-        {styles && (
-          <style
-            dangerouslySetInnerHTML={{ __html: styles }}
-            suppressHydrationWarning
-          />
-        )}
+        {styles && <style>{styles}</style>}
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
         <ApplyThemeScript />

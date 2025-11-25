@@ -1,34 +1,23 @@
 'use client';
 
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, type Variants, type HTMLMotionProps } from 'motion/react';
 import { type ReceivedChatMessage } from '@livekit/components-react';
 import { ShimmerText } from '@/components/livekit/shimmer-text';
 import { cn } from '@/lib/utils';
 
 const MotionMessage = motion.create('p');
 
-const VIEW_MOTION_PROPS = {
-  variants: {
-    visible: {
-      opacity: 1,
-      transition: {
-        ease: 'easeIn',
-        duration: 0.5,
-        delay: 0.8,
-      },
-    },
-    hidden: {
-      opacity: 0,
-      transition: {
-        ease: 'easeIn',
-        duration: 0.5,
-        delay: 0,
-      },
-    },
-  },
+const VIEW_VARIANTS: Variants = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
+
+const VIEW_MOTION_PROPS: HTMLMotionProps<'p'> = {
+  variants: VIEW_VARIANTS,
   initial: 'hidden',
   animate: 'visible',
   exit: 'hidden',
+  transition: { duration: 0.5, delay: 0.4, ease: [0.42, 0, 0.58, 1] },
 };
 
 interface PreConnectMessageProps {
