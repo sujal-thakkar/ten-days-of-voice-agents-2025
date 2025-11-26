@@ -1,0 +1,86 @@
+{
+  "company": "Hosla",
+  "tagline": "Your Extended Family",
+  "description": "Hosla is an elderly care startup in India dedicated to empowering seniors (50+) and enriching their lives. We provide both online and offline services to support independent and fulfilling living, ensuring seniors feel cared for, respected, and connected.",
+  "founder": "Mr. Shantanu Mukhopadhyay (Indian Icon of the Year 2024 for senior care)",
+  "contact": {
+    "phone": "+91-7811 009 309",
+    "email": "shraddhawelfareassociation@gmail.com",
+    "website": "https://hosla.in"
+  },
+  "products": [
+    {
+      "name": "Membership Plans",
+      "description": "Exclusive benefits including weekly home visits, emergency support, and discounts.",
+      "pricing": "Non-metro: ₹300/mo or ₹3,000/yr. Metro: ₹400/mo or ₹4,000/yr. 1 Month Free Trial available."
+    },
+    {
+      "name": "Medicine Delivery",
+      "description": "Reliable doorstep delivery of medicines. Valid prescription preferred.",
+      "pricing": "Included in membership (up to 4 free deliveries/month). Chargeable for non-members/extra orders."
+    },
+    {
+      "name": "Grocery Delivery",
+      "description": "Fresh groceries delivered with attention to dietary needs.",
+      "pricing": "Included in membership (up to 4 free deliveries/month). Chargeable for non-members/extra orders."
+    },
+    {
+      "name": "Household Services",
+      "description": "Access to verified maids, cooks, carpenters, and plumbers. (Members Only)",
+      "pricing": "Varies by service."
+    },
+    {
+      "name": "Doctor Appointments",
+      "description": "Assistance with scheduling, reminders, and support for in-person or teleconsultations.",
+      "pricing": "Varies by service."
+    },
+    {
+      "name": "Companion Care",
+      "description": "Emotional support and company for seniors.",
+      "pricing": "Contact for details."
+    },
+    {
+      "name": "Free Services",
+      "description": "Counseling, digital education, meditation, and abuse counseling.",
+      "pricing": "Free for all seniors."
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is Hosla?",
+      "answer": "Hosla is a senior citizen care provider offering personalized services, wellness programs, and companionship to help elders live independently with dignity and joy."
+    },
+    {
+      "question": "Who can use Hosla's services?",
+      "answer": "We primarily serve senior citizens above the age of 50, with tailored offerings for both members and non-members."
+    },
+    {
+      "question": "What are the membership fees?",
+      "answer": "For non-metro cities, it's ₹300/month or ₹3,000/year. For metro cities, it's ₹400/month or ₹4,000/year. We also have a Gold Membership."
+    },
+    {
+      "question": "What benefits do members get?",
+      "answer": "Members get 4 free doorstep deliveries per month, weekly home visits, up to 35% discounts, emergency support, personalized care plans, and priority bookings."
+    },
+    {
+      "question": "Is there a free trial?",
+      "answer": "Yes, we offer one month of privilege services free for potential members. Basic services like counseling and digital education are free for all seniors."
+    },
+    {
+      "question": "How quickly are services delivered?",
+      "answer": "Depending on urgency, services are fulfilled immediately, within 24 hours, or within 48 hours."
+    },
+    {
+      "question": "Who delivers the services?",
+      "answer": "Services are delivered by trained and verified 'Hosla Patrons'."
+    },
+    {
+      "question": "Do you cover rural areas?",
+      "answer": "Hosla operates mainly in towns and cities, while our partner Shraddha services cater to rural regions."
+    },
+    {
+      "question": "How can I contact Hosla?",
+      "answer": "You can call us at +91-7811 009 309 or email shraddhawelfareassociation@gmail.com."
+    }
+  ]
+}
