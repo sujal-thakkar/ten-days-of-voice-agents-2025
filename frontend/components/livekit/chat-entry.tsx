@@ -33,29 +33,31 @@ export const ChatEntry = ({
     <li
       title={title}
       data-lk-message-origin={messageOrigin}
-      className={cn('group flex w-full flex-col gap-0.5', className)}
+      className={cn(
+        'group flex w-full flex-col gap-1',
+        messageOrigin === 'local' ? 'items-end' : 'items-start',
+        className
+      )}
       {...props}
     >
-      <header
+      <div
         className={cn(
-          'text-muted-foreground flex items-center gap-2 text-sm',
-          messageOrigin === 'local' ? 'flex-row-reverse' : 'text-left'
-        )}
-      >
-        {name && <strong>{name}</strong>}
-        <span className="font-mono text-xs opacity-0 transition-opacity ease-linear group-hover:opacity-100">
-          {hasBeenEdited && '*'}
-          {time.toLocaleTimeString(locale, { timeStyle: 'short' })}
-        </span>
-      </header>
-      <span
-        className={cn(
-          'max-w-4/5 rounded-[20px]',
-          messageOrigin === 'local' ? 'bg-muted ml-auto p-2' : 'mr-auto'
+          'max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm transition-all',
+          messageOrigin === 'local'
+            ? 'bg-primary text-primary-foreground rounded-tr-sm'
+            : 'bg-muted/50 text-foreground rounded-tl-sm border border-white/5'
         )}
       >
         {message}
-      </span>
+      </div>
+
+      <div className="flex items-center gap-2 px-1">
+        {name && <span className="text-[10px] font-medium text-muted-foreground">{name}</span>}
+        <span className="text-[10px] text-muted-foreground/50 opacity-0 transition-opacity group-hover:opacity-100">
+          {hasBeenEdited && <span className="mr-1 italic">edited</span>}
+          {time.toLocaleTimeString(locale, { timeStyle: 'short' })}
+        </span>
+      </div>
     </li>
   );
 };

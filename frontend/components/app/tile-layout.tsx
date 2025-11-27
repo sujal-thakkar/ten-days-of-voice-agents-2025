@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Track } from 'livekit-client';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, type Transition } from 'motion/react';
 import {
   BarVisualizer,
   type TrackReference,
@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 
 const MotionContainer = motion.create('div');
 
-const ANIMATION_TRANSITION = {
+const ANIMATION_TRANSITION: Transition = {
   type: 'spring',
   stiffness: 675,
   damping: 75,
@@ -92,8 +92,8 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
   const videoHeight = agentVideoTrack?.publication.dimensions?.height ?? 0;
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-8 bottom-32 z-50 md:top-12 md:bottom-40">
-      <div className="relative mx-auto h-full max-w-2xl px-4 md:px-0">
+    <div className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center">
+      <div className="relative h-full w-full max-w-2xl px-4 md:px-0">
         <div className={cn(classNames.grid)}>
           {/* Agent */}
           <div
