@@ -20,20 +20,20 @@ export interface AppConfig {
 }
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
-  companyName: 'LiveKit',
-  pageTitle: 'LiveKit Voice Agent',
-  pageDescription: 'A voice agent built with LiveKit',
+  companyName: 'Bank of Baroda',
+  pageTitle: 'BoB Fraud Alert Voice Agent',
+  pageDescription: "Speak with Bank of Baroda's AI-powered fraud detection assistant.",
 
   supportsChatInput: true,
   supportsVideoInput: true,
   supportsScreenShare: true,
   isPreConnectBufferEnabled: true,
 
-  logo: '/lk-logo.svg',
-  accent: '#002cf2',
-  logoDark: '/lk-logo-dark.svg',
-  accentDark: '#1fd5f9',
-  startButtonText: 'Start call',
+  logo: '/bob-logo.png',
+  accent: '#F15A24', // BoB signature orange
+  logoDark: '/bob.png',
+  accentDark: '#FF7A45', // lighter orange for dark mode
+  startButtonText: 'Verify Transaction',
 
   // for LiveKit Cloud Sandbox
   sandboxId: undefined,

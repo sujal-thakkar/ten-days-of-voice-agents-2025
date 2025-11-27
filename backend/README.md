@@ -11,6 +11,32 @@
 
 A complete starter project for building voice AI apps with [LiveKit Agents for Python](https://github.com/livekit/agents) and [LiveKit Cloud](https://cloud.livekit.io/).
 
+## Day 6 – Fraud Alert Voice Agent
+
+Day 6 turns the starter into a fully guided fraud-alert specialist for Murf Bank. The agent now:
+
+- Pulls suspicious-card cases from a local SQLite database (real persistence instead of JSON mocks).
+- Uses LiveKit tools to load a case, verify the caller with a sandbox security question, describe the flagged purchase, and write back the final disposition (`confirmed_safe`, `confirmed_fraud`, or `verification_failed`).
+- Logs every database update so you can demo the end-to-end verification loop.
+
+### Fraud database quick start
+
+1. Seed the sample data once (creates `src/data/fraud_cases.db` by default):
+
+  ```bash
+  uv run python src/fraud_db.py
+  ```
+
+2. Point both the backend and the frontend at the same file by adding to each `.env.local`:
+
+  ```env
+  FRAUD_DB_PATH=/absolute/path/to/backend/src/data/fraud_cases.db
+  ```
+
+  If you omit the variable the backend writes to `backend/src/data/fraud_cases.db` and the frontend API falls back to `../backend/src/data/fraud_cases.db`. Setting the value explicitly avoids path issues on Windows.
+
+3. Run the agent (`uv run python src/agent.py dev`). Every verification result will overwrite the matching row. The frontend now exposes `/api/fraud-cases` so you can show the updated table live.
+
 **Based on:** [livekit-examples/agent-starter-python](https://github.com/livekit-examples/agent-starter-python)
 
 The starter project includes:

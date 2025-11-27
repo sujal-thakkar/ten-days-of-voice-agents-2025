@@ -89,7 +89,10 @@ export function AgentControlBar({
     <div
       aria-label="Voice assistant controls"
       className={cn(
-        'bg-background border-input/50 dark:border-muted flex flex-col rounded-[31px] border p-3 drop-shadow-md/3',
+        'relative flex flex-col rounded-3xl p-1 shadow-2xl',
+        'bg-gradient-to-b from-zinc-900/95 to-zinc-950/98 backdrop-blur-2xl',
+        'border border-white/10',
+        'before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-b before:from-white/5 before:to-transparent before:pointer-events-none',
         className
       )}
       {...props}
@@ -103,8 +106,9 @@ export function AgentControlBar({
         />
       )}
 
-      <div className="flex gap-1">
-        <div className="flex grow gap-1">
+      <div className="flex items-center gap-2 px-2 py-1.5">
+        {/* Left Controls Group */}
+        <div className="flex items-center gap-1 rounded-2xl bg-white/5 p-1">
           {/* Toggle Microphone */}
           {visibleControls.microphone && (
             <TrackSelector
@@ -134,7 +138,10 @@ export function AgentControlBar({
               onActiveDeviceChange={handleVideoDeviceChange}
             />
           )}
+        </div>
 
+        {/* Center Controls Group */}
+        <div className="flex items-center gap-1 rounded-2xl bg-white/5 p-1">
           {/* Toggle Screen Share */}
           {visibleControls.screenShare && (
             <TrackToggle
@@ -160,13 +167,16 @@ export function AgentControlBar({
           </Toggle>
         </div>
 
+        {/* Spacer */}
+        <div className="grow" />
+
         {/* Disconnect */}
         {visibleControls.leave && (
           <Button
             variant="destructive"
             onClick={handleDisconnect}
             disabled={!isSessionActive}
-            className="font-mono"
+            className="font-mono transition-transform duration-200 hover:scale-[1.02]"
           >
             <PhoneDisconnectIcon weight="bold" />
             <span className="hidden md:inline">END CALL</span>

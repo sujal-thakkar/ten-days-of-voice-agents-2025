@@ -12,6 +12,7 @@ import {
 import { cn } from '@/lib/utils';
 
 const MotionContainer = motion.create('div');
+const MotionSpan = motion.create('span');
 
 const ANIMATION_TRANSITION = {
   type: 'spring',
@@ -116,32 +117,54 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                   }}
                   animate={{
                     opacity: 1,
-                    scale: chatOpen ? 1 : 5,
+                    scale: 1,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0,
                   }}
                   transition={{
                     ...ANIMATION_TRANSITION,
                     delay: animationDelay,
                   }}
                   className={cn(
-                    'bg-background aspect-square h-[90px] rounded-md border border-transparent transition-[border,drop-shadow]',
-                    chatOpen && 'border-input/50 drop-shadow-lg/10 delay-200'
+                    'relative aspect-square h-[90px] rounded-2xl transition-all duration-300',
+                    !chatOpen && 'scale-[5]',
+                    chatOpen && 'drop-shadow-2xl'
                   )}
                 >
-                  <BarVisualizer
-                    barCount={5}
-                    state={agentState}
-                    options={{ minHeight: 5 }}
-                    trackRef={agentAudioTrack}
-                    className={cn('flex h-full items-center justify-center gap-1')}
-                  >
-                    <span
-                      className={cn([
-                        'bg-muted min-h-2.5 w-2.5 rounded-full',
-                        'origin-center transition-colors duration-250 ease-linear',
-                        'data-[lk-highlighted=true]:bg-foreground data-[lk-muted=true]:bg-muted',
-                      ])}
-                    />
-                  </BarVisualizer>
+                  {/* Outer glow ring */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#F15A24]/20 via-transparent to-[#FF7043]/20 blur-xl" />
+                  
+                  {/* Main container with gradient border */}
+                  <div className="relative h-full w-full rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-950 p-[2px]">
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#F15A24]/30 via-transparent to-[#FF7043]/30 opacity-50" />
+                    
+                    <div className="relative h-full w-full rounded-[14px] bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 overflow-hidden">
+                      {/* Inner ambient glow */}
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(241,90,36,0.1)_0%,transparent_70%)]" />
+                      
+                      <BarVisualizer
+                        barCount={5}
+                        state={agentState}
+                        options={{ minHeight: 8 }}
+                        trackRef={agentAudioTrack}
+                        className={cn('flex h-full items-center justify-center gap-2 px-3')}
+                      >
+                        <MotionSpan
+                          className={cn([
+                            'relative min-h-3 w-3 rounded-full',
+                            'bg-gradient-to-b from-zinc-500 to-zinc-600',
+                            'shadow-[0_0_8px_rgba(0,0,0,0.3)]',
+                            'data-[lk-highlighted=true]:from-[#F15A24] data-[lk-highlighted=true]:to-[#FF7043]',
+                            'data-[lk-highlighted=true]:shadow-[0_0_20px_rgba(241,90,36,0.6)]',
+                            'data-[lk-muted=true]:from-zinc-700 data-[lk-muted=true]:to-zinc-800',
+                            'transition-all duration-150 ease-out',
+                          ])}
+                        />
+                      </BarVisualizer>
+                    </div>
+                  </div>
                 </MotionContainer>
               )}
 

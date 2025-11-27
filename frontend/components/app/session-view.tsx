@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import type { AppConfig } from '@/app-config';
 import { ChatTranscript } from '@/components/app/chat-transcript';
+import { FraudCasePanel } from '@/components/app/fraud-case-panel';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
 import { TileLayout } from '@/components/app/tile-layout';
 import {
@@ -92,6 +93,7 @@ export const SessionView = ({
 
   return (
     <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
+      <FraudCasePanel className="pointer-events-auto fixed left-4 right-4 top-4 z-40 mx-auto w-full max-w-sm md:left-6 md:right-auto md:max-w-xs lg:max-w-sm" />
       {/* Chat Transcript */}
       <div
         className={cn(

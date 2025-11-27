@@ -27,6 +27,7 @@ Also available for:
 - Virtual avatar integration
 - Light/dark theme switching with system preference detection
 - Customizable branding, colors, and UI text via configuration
+- Day 6 fraud-case dashboard that reads live data from the SQLite database used by the backend tools
 
 This template is built with Next.js and is free for you to use or modify as you see fit.
 
@@ -120,9 +121,13 @@ You'll also need to configure your LiveKit credentials in `.env.local` (copy `.e
 LIVEKIT_API_KEY=your_livekit_api_key
 LIVEKIT_API_SECRET=your_livekit_api_secret
 LIVEKIT_URL=https://your-livekit-server-url
+FRAUD_DB_PATH=/absolute/path/to/backend/src/data/fraud_cases.db
 ```
 
 These are required for the voice agent functionality to work with your LiveKit project.
+`FRAUD_DB_PATH` should point to the exact SQLite file seeded by the backend (for example `d:/WEB-DEV/ten-days-of-voice-agents-2025/backend/src/data/fraud_cases.db`). If you omit it, the API falls back to `../backend/src/data/fraud_cases.db` relative to the frontend directory.
+
+These entries are required for the voice agent functionality to work with your LiveKit project and to keep the fraud dashboard in sync with the backend tools.
 
 ## Contributing
 
