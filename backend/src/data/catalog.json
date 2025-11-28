@@ -1,0 +1,182 @@
+[
+  {
+    "id": "bread_whole_wheat",
+    "name": "Whole Wheat Sandwich Bread",
+    "category": "groceries",
+    "price_inr": 55,
+    "unit": "400 g loaf",
+    "brand": "Harvest Gold",
+    "description": "Soft whole wheat loaf ideal for sandwiches and toast.",
+    "tags": ["vegetarian", "contains-gluten"]
+  },
+  {
+    "id": "eggs_free_range_dozen",
+    "name": "Free-Range Eggs",
+    "category": "groceries",
+    "price_inr": 95,
+    "unit": "12 pcs",
+    "brand": "Happy Hens",
+    "description": "Protein-rich brown eggs sourced from free-range farms.",
+    "tags": ["protein"]
+  },
+  {
+    "id": "milk_organic_1l",
+    "name": "Organic Cow Milk",
+    "category": "groceries",
+    "price_inr": 78,
+    "unit": "1 L",
+    "brand": "Country Delight",
+    "description": "Fresh organic A2 milk, pasteurized and homogenized.",
+    "tags": ["vegetarian", "dairy"]
+  },
+  {
+    "id": "butter_amul_salted",
+    "name": "Amul Salted Butter",
+    "category": "groceries",
+    "price_inr": 58,
+    "unit": "100 g",
+    "brand": "Amul",
+    "description": "Classic salted table butter, perfect for cooking or spreads.",
+    "tags": ["vegetarian", "dairy"]
+  },
+  {
+    "id": "peanut_butter_crunchy",
+    "name": "Crunchy Peanut Butter",
+    "category": "groceries",
+    "price_inr": 210,
+    "unit": "350 g jar",
+    "brand": "The Whole Truth",
+    "description": "Protein-packed crunchy peanut butter with no refined sugar.",
+    "tags": ["vegetarian", "protein"]
+  },
+  {
+    "id": "fruit_jam_mixed",
+    "name": "Mixed Fruit Jam",
+    "category": "groceries",
+    "price_inr": 120,
+    "unit": "320 g jar",
+    "brand": "Kissan",
+    "description": "Bright and tangy mixed fruit jam, kid-friendly.",
+    "tags": ["vegetarian", "contains-sugar"]
+  },
+  {
+    "id": "pasta_penne_durum",
+    "name": "Durum Wheat Penne",
+    "category": "groceries",
+    "price_inr": 145,
+    "unit": "500 g pack",
+    "brand": "Barilla",
+    "description": "Classic Italian penne made from 100% durum wheat semolina.",
+    "tags": ["vegetarian", "contains-gluten"]
+  },
+  {
+    "id": "pasta_sauce_arrabbiata",
+    "name": "Arrabbiata Pasta Sauce",
+    "category": "groceries",
+    "price_inr": 260,
+    "unit": "350 g jar",
+    "brand": "Del Monte",
+    "description": "Spicy tomato-based sauce with Italian herbs and chili.",
+    "tags": ["vegetarian", "vegan"]
+  },
+  {
+    "id": "parmesan_shredded",
+    "name": "Shredded Parmesan",
+    "category": "groceries",
+    "price_inr": 310,
+    "unit": "150 g pouch",
+    "brand": "Milky Mist",
+    "description": "Ready-to-use parmesan shavings to finish pastas and salads.",
+    "tags": ["vegetarian", "dairy"]
+  },
+  {
+    "id": "basil_fresh_bunch",
+    "name": "Fresh Basil Bunch",
+    "category": "groceries",
+    "price_inr": 45,
+    "unit": "30 g bunch",
+    "brand": "Zesty Farm",
+    "description": "Aromatic basil leaves, hydroponically grown and pesticide-free.",
+    "tags": ["vegetarian", "vegan", "herb"]
+  },
+  {
+    "id": "ready_margherita_pizza",
+    "name": "Stone-Baked Margherita Pizza",
+    "category": "prepared-food",
+    "price_inr": 389,
+    "unit": "11-inch",
+    "brand": "Zomaland Kitchens",
+    "description": "Wood-fired crust pizza topped with san marzano sauce and mozzarella.",
+    "tags": ["vegetarian"]
+  },
+  {
+    "id": "ready_paneer_tikka_wrap",
+    "name": "Paneer Tikka Wrap",
+    "category": "prepared-food",
+    "price_inr": 249,
+    "unit": "230 g",
+    "brand": "Zomaland Kitchens",
+    "description": "Chargrilled paneer with mint chutney and pickled onions in a laccha paratha.",
+    "tags": ["vegetarian", "spicy"]
+  },
+  {
+    "id": "ready_chicken_biryani",
+    "name": "Lucknowi Chicken Biryani",
+    "category": "prepared-food",
+    "price_inr": 329,
+    "unit": "500 g",
+    "brand": "Zomaland Kitchens",
+    "description": "Slow-cooked biryani with fragrant basmati rice and tender chicken.",
+    "tags": ["non-vegetarian", "spicy"]
+  },
+  {
+    "id": "snack_masala_trailmix",
+    "name": "Masala Trail Mix",
+    "category": "snacks",
+    "price_inr": 165,
+    "unit": "200 g pouch",
+    "brand": "Open Secret",
+    "description": "Crunchy nuts, seeds, and puffed grains tossed in tangy masala.",
+    "tags": ["vegetarian", "protein", "vegan"]
+  },
+  {
+    "id": "snack_baked_multigrain_chips",
+    "name": "Baked Multigrain Chips",
+    "category": "snacks",
+    "price_inr": 95,
+    "unit": "100 g pack",
+    "brand": "Too Yumm",
+    "description": "Air-baked chips made from sorghum, quinoa, and flax seeds.",
+    "tags": ["vegetarian", "vegan"]
+  },
+  {
+    "id": "snack_dark_chocolate_brownie",
+    "name": "Dark Chocolate Brownie",
+    "category": "snacks",
+    "price_inr": 130,
+    "unit": "90 g",
+    "brand": "Theobroma",
+    "description": "Fudgy brownie made with 55% couverture chocolate.",
+    "tags": ["vegetarian", "contains-gluten"]
+  },
+  {
+    "id": "sugar_unrefined_500g",
+    "name": "Raw Cane Sugar",
+    "category": "groceries",
+    "price_inr": 75,
+    "unit": "500 g pouch",
+    "brand": "Parry's",
+    "description": "Golden crystals of minimally processed cane sugar.",
+    "tags": ["vegetarian", "vegan"]
+  },
+  {
+    "id": "grocery_masala_chai_kit",
+    "name": "Masala Chai Essentials Kit",
+    "category": "groceries",
+    "price_inr": 160,
+    "unit": "Assorted pack",
+    "brand": "Tata Tea",
+    "description": "Premium Assam tea with cardamom, ginger, and clove sachets.",
+    "tags": ["vegetarian", "vegan"]
+  }
+]

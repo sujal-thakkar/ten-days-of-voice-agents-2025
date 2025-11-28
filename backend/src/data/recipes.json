@@ -1,0 +1,58 @@
+{
+  "peanut_butter_sandwich": {
+    "display_name": "Peanut Butter Sandwich Kit",
+    "description": "All you need for quick peanut butter sandwiches (two to three servings).",
+    "items": [
+      { "catalog_id": "bread_whole_wheat", "quantity": 1, "notes": "1 loaf" },
+      {
+        "catalog_id": "peanut_butter_crunchy",
+        "quantity": 1,
+        "notes": "350 g jar"
+      },
+      {
+        "catalog_id": "fruit_jam_mixed",
+        "quantity": 1,
+        "notes": "Optional for PB&J"
+      }
+    ]
+  },
+  "pasta_dinner_for_two": {
+    "display_name": "Arrabbiata Pasta Dinner",
+    "description": "Pantry staples for a spicy pasta night serving two people.",
+    "items": [
+      {
+        "catalog_id": "pasta_penne_durum",
+        "quantity": 1,
+        "notes": "500 g pack"
+      },
+      {
+        "catalog_id": "pasta_sauce_arrabbiata",
+        "quantity": 1,
+        "notes": "350 g jar"
+      },
+      { "catalog_id": "parmesan_shredded", "quantity": 1, "notes": "Topping" },
+      { "catalog_id": "basil_fresh_bunch", "quantity": 1, "notes": "Garnish" }
+    ]
+  },
+  "masala_chai_for_four": {
+    "display_name": "Masala Chai Kit",
+    "description": "Quick grocery pull for four cups of masala chai.",
+    "items": [
+      {
+        "catalog_id": "grocery_masala_chai_kit",
+        "quantity": 1,
+        "notes": "Spice sachets included"
+      },
+      {
+        "catalog_id": "milk_organic_1l",
+        "quantity": 1,
+        "notes": "Use half to one liter"
+      },
+      {
+        "catalog_id": "sugar_unrefined_500g",
+        "quantity": 1,
+        "notes": "Sweeten to taste"
+      }
+    ]
+  }
+}
