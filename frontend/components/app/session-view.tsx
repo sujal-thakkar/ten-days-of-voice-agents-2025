@@ -71,7 +71,7 @@ export const SessionView = ({
   useDebugMode({ enabled: IN_DEVELOPMENT });
 
   const messages = useChatMessages();
-  const [chatOpen, setChatOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false); // Only show chat when toggle is clicked
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const controls: ControlBarControls = {
@@ -82,26 +82,32 @@ export const SessionView = ({
     screenShare: appConfig.supportsVideoInput,
   };
 
+  // Auto-scroll to bottom when new messages arrive (if chat is open)
   useEffect(() => {
-    const lastMessage = messages.at(-1);
-    const lastMessageIsLocal = lastMessage?.from?.isLocal === true;
-
-    if (scrollAreaRef.current && lastMessageIsLocal) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+    if (scrollAreaRef.current && chatOpen && messages.length > 0) {
+      // Small delay to ensure DOM has updated
+      requestAnimationFrame(() => {
+        if (scrollAreaRef.current) {
+          scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+        }
+      });
     }
-  }, [messages]);
+  }, [messages.length, chatOpen]);
 
   return (
     <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
       <FraudCasePanel className="pointer-events-auto fixed left-4 right-4 top-4 z-40 mx-auto w-full max-w-sm md:left-6 md:right-auto md:max-w-xs lg:max-w-sm" />
-      {/* Chat Transcript */}
+      {/* Tile Layout - behind chat */}
+      <TileLayout chatOpen={chatOpen} />
+
+      {/* Chat Transcript - above tile layout */}
       <div
         className={cn(
-          'fixed inset-0 grid grid-cols-1 grid-rows-1',
+          'fixed inset-0 z-30 grid grid-cols-1 grid-rows-1',
           !chatOpen && 'pointer-events-none'
         )}
       >
-        <Fade top className="absolute inset-x-4 top-0 h-40" />
+        <Fade top className="absolute inset-x-4 top-0 z-10 h-40" />
         <ScrollArea ref={scrollAreaRef} className="px-4 pt-40 pb-[150px] md:px-6 md:pb-[180px]">
           <ChatTranscript
             hidden={!chatOpen}
@@ -110,9 +116,6 @@ export const SessionView = ({
           />
         </ScrollArea>
       </div>
-
-      {/* Tile Layout */}
-      <TileLayout chatOpen={chatOpen} />
 
       {/* Bottom */}
       <MotionBottom

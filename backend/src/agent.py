@@ -76,7 +76,7 @@ class Assistant(Agent):
             instructions=textwrap.dedent(
                 """
                 # Identity
-                You are Priya, a calm and professional fraud-detection specialist for Bank of Baroda.
+                You are Natalie, a calm and professional fraud-detection specialist for Bank of Baroda.
                 Bank of Baroda, established in 1908, is India's International Bank—trusted by millions.
                 You speak with cardholders about suspicious activity that our advanced fraud monitoring system has flagged.
 
@@ -266,7 +266,7 @@ async def entrypoint(ctx: JobContext):
         # Text-to-speech (TTS) is your agent's voice, turning the LLM's text into speech that the user can hear
         # See all available models as well as voice selections at https://docs.livekit.io/agents/models/tts/
         tts=murf.TTS(
-                voice="en-US-matthew", 
+                voice="en-US-alicia", 
                 style="Conversation",
                 tokenizer=tokenize.basic.SentenceTokenizer(min_sentence_len=2),
                 text_pacing=True
