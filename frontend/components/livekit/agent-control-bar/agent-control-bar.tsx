@@ -3,7 +3,7 @@
 import { type HTMLAttributes, useCallback, useState } from 'react';
 import { Track } from 'livekit-client';
 import { useChat, useRemoteParticipants } from '@livekit/components-react';
-import { ChatTextIcon, PhoneDisconnectIcon } from '@phosphor-icons/react/dist/ssr';
+import { ChatTextIcon } from '@phosphor-icons/react/dist/ssr';
 import { useSession } from '@/components/app/session-provider';
 import { TrackToggle } from '@/components/livekit/agent-control-bar/track-toggle';
 import { Button } from '@/components/livekit/button';
@@ -13,6 +13,7 @@ import { ChatInput } from './chat-input';
 import { UseInputControlsProps, useInputControls } from './hooks/use-input-controls';
 import { usePublishPermissions } from './hooks/use-publish-permissions';
 import { TrackSelector } from './track-selector';
+import { SpellScrollIcon, RestartSpellIcon, ExitPortalIcon } from '@/components/livekit/fantasy-icons';
 
 export interface ControlBarControls {
   leave?: boolean;
@@ -20,6 +21,7 @@ export interface ControlBarControls {
   microphone?: boolean;
   screenShare?: boolean;
   chat?: boolean;
+  restartStory?: boolean;
 }
 
 export interface AgentControlBarProps extends UseInputControlsProps {
@@ -27,6 +29,7 @@ export interface AgentControlBarProps extends UseInputControlsProps {
   onDisconnect?: () => void;
   onChatOpenChange?: (open: boolean) => void;
   onDeviceError?: (error: { source: Track.Source; error: Error }) => void;
+  onRestartStory?: () => void;
 }
 
 /**
@@ -39,6 +42,7 @@ export function AgentControlBar({
   onDisconnect,
   onDeviceError,
   onChatOpenChange,
+  onRestartStory,
   ...props
 }: AgentControlBarProps & HTMLAttributes<HTMLDivElement>) {
   const { send } = useChat();
@@ -75,12 +79,19 @@ export function AgentControlBar({
     onDisconnect?.();
   }, [endSession, onDisconnect]);
 
+  const handleRestartStory = useCallback(async () => {
+    // End current session and start a new one
+    endSession();
+    onRestartStory?.();
+  }, [endSession, onRestartStory]);
+
   const visibleControls = {
     leave: controls?.leave ?? true,
     microphone: controls?.microphone ?? publishPermissions.microphone,
     screenShare: controls?.screenShare ?? publishPermissions.screenShare,
     camera: controls?.camera ?? publishPermissions.camera,
     chat: controls?.chat ?? publishPermissions.data,
+    restartStory: controls?.restartStory ?? true,
   };
 
   const isAgentAvailable = participants.some((p) => p.isAgent);
@@ -89,7 +100,7 @@ export function AgentControlBar({
     <div
       aria-label="Voice assistant controls"
       className={cn(
-        'bg-background border-input/50 dark:border-muted flex flex-col rounded-[31px] border p-3 drop-shadow-md/3',
+        'fantasy-control-bar flex flex-col rounded-2xl p-3 drop-shadow-xl',
         className
       )}
       {...props}
@@ -103,8 +114,8 @@ export function AgentControlBar({
         />
       )}
 
-      <div className="flex gap-1">
-        <div className="flex grow gap-1">
+      <div className="flex gap-2">
+        <div className="flex grow gap-2">
           {/* Toggle Microphone */}
           {visibleControls.microphone && (
             <TrackSelector
@@ -117,6 +128,7 @@ export function AgentControlBar({
               onPressedChange={microphoneToggle.toggle}
               onMediaDeviceError={handleMicrophoneDeviceSelectError}
               onActiveDeviceChange={handleAudioDeviceChange}
+              className="fantasy-toggle"
             />
           )}
 
@@ -132,6 +144,7 @@ export function AgentControlBar({
               onPressedChange={cameraToggle.toggle}
               onMediaDeviceError={handleCameraDeviceSelectError}
               onActiveDeviceChange={handleVideoDeviceChange}
+              className="fantasy-toggle"
             />
           )}
 
@@ -145,6 +158,7 @@ export function AgentControlBar({
               pressed={screenShareToggle.enabled}
               disabled={screenShareToggle.pending}
               onPressedChange={screenShareToggle.toggle}
+              className="fantasy-toggle"
             />
           )}
 
@@ -155,9 +169,24 @@ export function AgentControlBar({
             aria-label="Toggle transcript"
             pressed={chatOpen}
             onPressedChange={handleToggleTranscript}
+            className="fantasy-toggle"
           >
-            <ChatTextIcon weight="bold" />
+            <SpellScrollIcon size={20} />
           </Toggle>
+
+          {/* Restart Story */}
+          {visibleControls.restartStory && (
+            <button
+              onClick={handleRestartStory}
+              disabled={!isSessionActive}
+              aria-label="Restart adventure"
+              title="Restart Adventure"
+              className="restart-btn flex items-center gap-2 px-3 py-2 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <RestartSpellIcon size={18} />
+              <span className="hidden sm:inline" style={{ fontFamily: 'var(--font-fantasy)' }}>New Quest</span>
+            </button>
+          )}
         </div>
 
         {/* Disconnect */}
@@ -166,11 +195,12 @@ export function AgentControlBar({
             variant="destructive"
             onClick={handleDisconnect}
             disabled={!isSessionActive}
-            className="font-mono"
+            className="font-fantasy tracking-wider"
+            style={{ fontFamily: 'var(--font-fantasy)' }}
           >
-            <PhoneDisconnectIcon weight="bold" />
-            <span className="hidden md:inline">END CALL</span>
-            <span className="inline md:hidden">END</span>
+            <ExitPortalIcon size={18} />
+            <span className="hidden md:inline">LEAVE REALM</span>
+            <span className="inline md:hidden">EXIT</span>
           </Button>
         )}
       </div>

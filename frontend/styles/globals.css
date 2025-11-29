@@ -36,6 +36,17 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Game Master Theme - Light Mode */
+  --gm-bg: linear-gradient(135deg, #2d1f3d 0%, #1a1425 50%, #0d0a12 100%);
+  --gm-border: #6b4c8a;
+  --gm-text: #f4e8d1;
+  --gm-accent: #c9a227;
+  --gm-shadow: rgba(107, 76, 138, 0.4);
+  --player-bg: linear-gradient(135deg, #1e3a5f 0%, #152238 100%);
+  --player-border: #4a7ca8;
+  --player-text: #e8f4f8;
+  --player-accent: #6bb3d9;
 }
 
 .dark {
@@ -70,6 +81,17 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.439 0 0);
+
+  /* Game Master Theme - Dark Mode */
+  --gm-bg: linear-gradient(135deg, #2d1f3d 0%, #1a1425 50%, #0d0a12 100%);
+  --gm-border: #8b6caa;
+  --gm-text: #f4e8d1;
+  --gm-accent: #d4af37;
+  --gm-shadow: rgba(139, 108, 170, 0.5);
+  --player-bg: linear-gradient(135deg, #1e3a5f 0%, #152238 100%);
+  --player-border: #5a9cd8;
+  --player-text: #e8f4f8;
+  --player-accent: #7bc3e9;
 }
 
 @theme inline {
@@ -79,6 +101,10 @@
   --font-mono:
     var(--font-commit-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
+  --font-fantasy:
+    var(--font-cinzel), 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  --font-narrative:
+    var(--font-crimson), 'Georgia', 'Times New Roman', serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -111,6 +137,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Custom animations */
+  --animate-orbit: orbit 3s linear infinite;
 }
 
 @layer base {
@@ -158,4 +187,488 @@
       background-position: 250% 0;
     }
   }
+
+  /* Orbit animation for magical particles */
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Floating animation for fantasy elements */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-10px) rotate(2deg);
+    }
+    50% {
+      transform: translateY(-5px) rotate(0deg);
+    }
+    75% {
+      transform: translateY(-15px) rotate(-2deg);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Mystical fog animation */
+  @keyframes fog-drift {
+    0%, 100% {
+      transform: translateX(0) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateX(20px) scale(1.1);
+      opacity: 0.5;
+    }
+  }
+
+  .animate-fog {
+    animation: fog-drift 8s ease-in-out infinite;
+  }
+
+  /* Sparkle animation */
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  /* Game Master Message Box */
+  .gm-message-box {
+    background: var(--gm-bg);
+    border: 2px solid var(--gm-border);
+    border-radius: 8px;
+    box-shadow: 
+      0 4px 20px var(--gm-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gm-message-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gm-accent), transparent);
+  }
+
+  .gm-message-box::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gm-accent), transparent);
+    opacity: 0.5;
+  }
+
+  /* Player Message Box */
+  .player-message-box {
+    background: var(--player-bg);
+    border: 2px solid var(--player-border);
+    border-radius: 8px;
+    box-shadow: 
+      0 2px 10px rgba(30, 58, 95, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Corner decorations for GM messages */
+  .gm-corner-decoration {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--gm-accent);
+  }
+
+  .gm-corner-tl {
+    top: 4px;
+    left: 4px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .gm-corner-tr {
+    top: 4px;
+    right: 4px;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .gm-corner-bl {
+    bottom: 4px;
+    left: 4px;
+    border-right: none;
+    border-top: none;
+  }
+
+  .gm-corner-br {
+    bottom: 4px;
+    right: 4px;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* Restart button styling */
+  .restart-btn {
+    background: linear-gradient(135deg, #8b4513 0%, #5d2e0c 100%);
+    border: 2px solid #d4af37;
+    color: #f4e8d1;
+    font-family: var(--font-fantasy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    box-shadow: 
+      0 2px 8px rgba(139, 69, 19, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .restart-btn:hover {
+    background: linear-gradient(135deg, #a0522d 0%, #6b3a10 100%);
+    border-color: #ffd700;
+    box-shadow: 
+      0 4px 12px rgba(139, 69, 19, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .restart-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Fantasy control bar styling */
+  .fantasy-control-bar {
+    background: linear-gradient(to top, 
+      rgba(13, 10, 18, 0.95) 0%, 
+      rgba(45, 31, 61, 0.9) 50%,
+      rgba(26, 20, 37, 0.85) 100%
+    );
+    border: 2px solid;
+    border-image: linear-gradient(90deg, #4a3660, #d4af37, #4a3660) 1;
+    box-shadow: 
+      0 -4px 20px rgba(139, 92, 246, 0.3),
+      inset 0 1px 0 rgba(212, 175, 55, 0.2);
+  }
+
+  /* Fantasy toggle button base */
+  .fantasy-toggle {
+    background: linear-gradient(135deg, #2d1f3d 0%, #1a1425 100%);
+    border: 2px solid #6b4c8a;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 
+      0 2px 8px rgba(107, 76, 138, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .fantasy-toggle:hover {
+    border-color: #d4af37;
+    box-shadow: 
+      0 4px 12px rgba(212, 175, 55, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .fantasy-toggle[data-state="on"] {
+    background: linear-gradient(135deg, #4a3660 0%, #2d1f3d 100%);
+    border-color: #d4af37;
+    box-shadow: 
+      0 0 15px rgba(212, 175, 55, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Pulsing glow animation for important elements */
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 5px var(--gm-accent), 0 0 10px var(--gm-accent);
+    }
+    50% {
+      box-shadow: 0 0 10px var(--gm-accent), 0 0 20px var(--gm-accent);
+    }
+  }
+
+  .glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  /* Fantasy background */
+  .fantasy-bg {
+    background: 
+      radial-gradient(ellipse at top, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(30, 58, 95, 0.2) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0612 0%, #1a1425 50%, #0d0a12 100%);
+  }
+
+  /* Animated stars background */
+  .stars-bg {
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, #ffd700, transparent),
+      radial-gradient(2px 2px at 40px 70px, #c4b5fd, transparent),
+      radial-gradient(1px 1px at 90px 40px, #ffd700, transparent),
+      radial-gradient(2px 2px at 130px 80px, #c4b5fd, transparent),
+      radial-gradient(1px 1px at 160px 30px, #ffd700, transparent),
+      radial-gradient(2px 2px at 200px 60px, #c4b5fd, transparent),
+      radial-gradient(1px 1px at 20px 130px, #ffd700, transparent),
+      radial-gradient(2px 2px at 60px 170px, #c4b5fd, transparent),
+      radial-gradient(1px 1px at 110px 140px, #ffd700, transparent),
+      radial-gradient(2px 2px at 150px 180px, #c4b5fd, transparent);
+    background-size: 200px 200px;
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Flying dragon animation */
+  @keyframes flyAcross {
+    0% {
+      transform: translateX(-150px) translateY(0) scaleX(1);
+      opacity: 0;
+    }
+    5% {
+      opacity: 0.2;
+    }
+    45% {
+      transform: translateX(50vw) translateY(-30px) scaleX(1);
+      opacity: 0.25;
+    }
+    50% {
+      transform: translateX(55vw) translateY(-20px) scaleX(-1);
+      opacity: 0.2;
+    }
+    95% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: translateX(-150px) translateY(10px) scaleX(-1);
+      opacity: 0;
+    }
+  }
+
+  /* Wing flapping animation */
+  @keyframes flapWings {
+    0%, 100% {
+      transform: scaleY(1) rotate(0deg);
+    }
+    50% {
+      transform: scaleY(0.7) rotate(-5deg);
+    }
+  }
+
+  /* Aurora wave animation */
+  @keyframes auroraWave {
+    0%, 100% {
+      transform: translateX(-30%) skewY(-5deg);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateX(30%) skewY(5deg);
+      opacity: 0.5;
+    }
+  }
+
+  /* Enhanced fog drift with more movement */
+  @keyframes fogDrift {
+    0%, 100% {
+      transform: translateX(0) translateY(0) scale(1);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateX(15px) translateY(-5px) scale(1.05);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translateX(25px) translateY(0) scale(1.1);
+      opacity: 0.5;
+    }
+    75% {
+      transform: translateX(10px) translateY(5px) scale(1.05);
+      opacity: 0.4;
+    }
+  }
+
+  /* Reverse flying animation for second dragon */
+  @keyframes flyAcrossReverse {
+    0% {
+      transform: translateX(calc(100vw + 150px)) translateY(0);
+      opacity: 0;
+    }
+    5% {
+      opacity: 0.15;
+    }
+    50% {
+      transform: translateX(30vw) translateY(-20px);
+      opacity: 0.18;
+    }
+    95% {
+      opacity: 0.15;
+    }
+    100% {
+      transform: translateX(-200px) translateY(10px);
+      opacity: 0;
+    }
+  }
+
+  /* Witch flying animation with bobbing motion */
+  @keyframes witchFly {
+    0% {
+      transform: translateX(-100px) translateY(0);
+      opacity: 0;
+    }
+    5% {
+      opacity: 0.2;
+    }
+    25% {
+      transform: translateX(25vw) translateY(-15px);
+    }
+    50% {
+      transform: translateX(50vw) translateY(10px);
+      opacity: 0.25;
+    }
+    75% {
+      transform: translateX(75vw) translateY(-10px);
+    }
+    95% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: translateX(calc(100vw + 100px)) translateY(5px);
+      opacity: 0;
+    }
+  }
+
+  /* Ghostly floating animation */
+  @keyframes ghostFloat {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.08;
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px) scale(1.05);
+      opacity: 0.12;
+    }
+    50% {
+      transform: translateY(-10px) translateX(-10px) scale(1);
+      opacity: 0.1;
+    }
+    75% {
+      transform: translateY(-30px) translateX(5px) scale(1.02);
+      opacity: 0.08;
+    }
+  }
+
+  /* Bat flying animation */
+  @keyframes batFly {
+    0%, 100% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-30px) translateX(20px) rotate(5deg);
+    }
+    50% {
+      transform: translateY(-15px) translateX(40px) rotate(-3deg);
+    }
+    75% {
+      transform: translateY(-35px) translateX(15px) rotate(4deg);
+    }
+  }
+
+  /* Floating spellbook animation */
+  @keyframes bookFloat {
+    0%, 100% {
+      transform: translateY(0) rotate(-3deg);
+    }
+    25% {
+      transform: translateY(-8px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-4px) rotate(3deg);
+    }
+    75% {
+      transform: translateY(-12px) rotate(0deg);
+    }
+  }
+
+  /* Sparkle animation for magical effects */
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+  }
+
+  /* Floating animation for particles */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.5;
+    }
+    25% {
+      transform: translateY(-15px) translateX(5px);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(-5px) translateX(-5px);
+      opacity: 0.6;
+    }
+    75% {
+      transform: translateY(-20px) translateX(3px);
+      opacity: 0.8;
+    }
+  }
+
+  /* Fog animation */
+  @keyframes fog {
+    0%, 100% {
+      transform: translateX(0);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateX(30px);
+      opacity: 0.5;
+    }
+  }
+}
+
+/* Animation utility classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.animate-fog {
+  animation: fog 8s ease-in-out infinite;
 }

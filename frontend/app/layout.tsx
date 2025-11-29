@@ -1,4 +1,4 @@
-import { Public_Sans } from 'next/font/google';
+import { Public_Sans, Cinzel, Crimson_Text } from 'next/font/google';
 import localFont from 'next/font/local';
 import { headers } from 'next/headers';
 import { ApplyThemeScript, ThemeToggle } from '@/components/app/theme-toggle';
@@ -8,6 +8,21 @@ import '@/styles/globals.css';
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
   subsets: ['latin'],
+});
+
+// Fantasy title font - for headings and important text
+const cinzel = Cinzel({
+  variable: '--font-cinzel',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+// Fantasy body font - for narrative text
+const crimsonText = Crimson_Text({
+  variable: '--font-crimson',
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
 });
 
 const commitMono = localFont({
@@ -54,6 +69,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       className={cn(
         publicSans.variable,
         commitMono.variable,
+        cinzel.variable,
+        crimsonText.variable,
         'scroll-smooth font-sans antialiased'
       )}
     >

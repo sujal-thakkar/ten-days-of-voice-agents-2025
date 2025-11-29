@@ -3,32 +3,35 @@
 import * as React from 'react';
 import { Track } from 'livekit-client';
 import { useTrackToggle } from '@livekit/components-react';
-import {
-  MicrophoneIcon,
-  MicrophoneSlashIcon,
-  MonitorArrowUpIcon,
-  SpinnerIcon,
-  VideoCameraIcon,
-  VideoCameraSlashIcon,
-} from '@phosphor-icons/react/dist/ssr';
+import { SpinnerIcon } from '@phosphor-icons/react/dist/ssr';
 import { Toggle } from '@/components/livekit/toggle';
 import { cn } from '@/lib/utils';
+import {
+  CrystalMicIcon,
+  CrystalMicMutedIcon,
+  MagicMirrorIcon,
+  MagicMirrorOffIcon,
+  PortalIcon,
+  PortalOffIcon,
+} from '@/components/livekit/fantasy-icons';
 
-function getSourceIcon(source: Track.Source, enabled: boolean, pending = false) {
+// Fantasy icon wrapper component
+function FantasyIcon({ 
+  IconOn, 
+  IconOff, 
+  enabled, 
+  pending 
+}: { 
+  IconOn: React.ComponentType<{ className?: string; size?: number }>;
+  IconOff: React.ComponentType<{ className?: string; size?: number }>;
+  enabled: boolean;
+  pending: boolean;
+}) {
   if (pending) {
-    return SpinnerIcon;
+    return <SpinnerIcon weight="bold" className="animate-spin" />;
   }
-
-  switch (source) {
-    case Track.Source.Microphone:
-      return enabled ? MicrophoneIcon : MicrophoneSlashIcon;
-    case Track.Source.Camera:
-      return enabled ? VideoCameraIcon : VideoCameraSlashIcon;
-    case Track.Source.ScreenShare:
-      return MonitorArrowUpIcon;
-    default:
-      return React.Fragment;
-  }
+  const Icon = enabled ? IconOn : IconOff;
+  return <Icon size={20} />;
 }
 
 export type TrackToggleProps = React.ComponentProps<typeof Toggle> & {
@@ -37,11 +40,26 @@ export type TrackToggleProps = React.ComponentProps<typeof Toggle> & {
 };
 
 export function TrackToggle({ source, pressed, pending, className, ...props }: TrackToggleProps) {
-  const IconComponent = getSourceIcon(source, pressed ?? false, pending);
+  const renderIcon = () => {
+    if (pending) {
+      return <SpinnerIcon weight="bold" className="animate-spin" />;
+    }
+
+    switch (source) {
+      case Track.Source.Microphone:
+        return pressed ? <CrystalMicIcon size={20} /> : <CrystalMicMutedIcon size={20} />;
+      case Track.Source.Camera:
+        return pressed ? <MagicMirrorIcon size={20} /> : <MagicMirrorOffIcon size={20} />;
+      case Track.Source.ScreenShare:
+        return pressed ? <PortalIcon size={20} /> : <PortalOffIcon size={20} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <Toggle pressed={pressed} aria-label={`Toggle ${source}`} className={cn(className)} {...props}>
-      <IconComponent weight="bold" className={cn(pending && 'animate-spin')} />
+      {renderIcon()}
       {props.children}
     </Toggle>
   );

@@ -1,20 +1,166 @@
 import { Button } from '@/components/livekit/button';
 
-function WelcomeImage() {
+function GameMasterIcon() {
   return (
     <svg
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
+      width="120"
+      height="120"
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="text-fg0 mb-4 size-16"
+      className="mb-6 animate-float"
     >
+      {/* Outer glow */}
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#d4af37"/>
+          <stop offset="50%" stopColor="#ffd700"/>
+          <stop offset="100%" stopColor="#c9a227"/>
+        </linearGradient>
+        <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#6b4c8a"/>
+          <stop offset="100%" stopColor="#4a3660"/>
+        </linearGradient>
+        <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.4"/>
+          <stop offset="100%" stopColor="#6b4c8a" stopOpacity="0"/>
+        </radialGradient>
+      </defs>
+      
+      {/* Aura rings */}
+      <circle cx="50" cy="50" r="48" stroke="url(#goldGradient)" strokeWidth="0.5" opacity="0.3" fill="none"/>
+      <circle cx="50" cy="50" r="45" stroke="url(#purpleGradient)" strokeWidth="0.5" opacity="0.4" fill="none"/>
+      
+      {/* D20 Shape */}
       <path
-        d="M15 24V40C15 40.7957 14.6839 41.5587 14.1213 42.1213C13.5587 42.6839 12.7956 43 12 43C11.2044 43 10.4413 42.6839 9.87868 42.1213C9.31607 41.5587 9 40.7957 9 40V24C9 23.2044 9.31607 22.4413 9.87868 21.8787C10.4413 21.3161 11.2044 21 12 21C12.7956 21 13.5587 21.3161 14.1213 21.8787C14.6839 22.4413 15 23.2044 15 24ZM22 5C21.2044 5 20.4413 5.31607 19.8787 5.87868C19.3161 6.44129 19 7.20435 19 8V56C19 56.7957 19.3161 57.5587 19.8787 58.1213C20.4413 58.6839 21.2044 59 22 59C22.7956 59 23.5587 58.6839 24.1213 58.1213C24.6839 57.5587 25 56.7957 25 56V8C25 7.20435 24.6839 6.44129 24.1213 5.87868C23.5587 5.31607 22.7956 5 22 5ZM32 13C31.2044 13 30.4413 13.3161 29.8787 13.8787C29.3161 14.4413 29 15.2044 29 16V48C29 48.7957 29.3161 49.5587 29.8787 50.1213C30.4413 50.6839 31.2044 51 32 51C32.7956 51 33.5587 50.6839 34.1213 50.1213C34.6839 49.5587 35 48.7957 35 48V16C35 15.2044 34.6839 14.4413 34.1213 13.8787C33.5587 13.3161 32.7956 13 32 13ZM42 21C41.2043 21 40.4413 21.3161 39.8787 21.8787C39.3161 22.4413 39 23.2044 39 24V40C39 40.7957 39.3161 41.5587 39.8787 42.1213C40.4413 42.6839 41.2043 43 42 43C42.7957 43 43.5587 42.6839 44.1213 42.1213C44.6839 41.5587 45 40.7957 45 40V24C45 23.2044 44.6839 22.4413 44.1213 21.8787C43.5587 21.3161 42.7957 21 42 21ZM52 17C51.2043 17 50.4413 17.3161 49.8787 17.8787C49.3161 18.4413 49 19.2044 49 20V44C49 44.7957 49.3161 45.5587 49.8787 46.1213C50.4413 46.6839 51.2043 47 52 47C52.7957 47 53.5587 46.6839 54.1213 46.1213C54.6839 45.5587 55 44.7957 55 44V20C55 19.2044 54.6839 18.4413 54.1213 17.8787C53.5587 17.3161 52.7957 17 52 17Z"
-        fill="currentColor"
+        d="M50 8L88 28V72L50 92L12 72V28L50 8Z"
+        fill="url(#purpleGradient)"
+        stroke="url(#goldGradient)"
+        strokeWidth="3"
+        filter="url(#glow)"
       />
+      
+      {/* Inner glow */}
+      <circle cx="50" cy="50" r="25" fill="url(#centerGlow)"/>
+      
+      {/* Inner lines */}
+      <path
+        d="M50 8L50 92M12 28L88 72M88 28L12 72"
+        stroke="url(#goldGradient)"
+        strokeWidth="1.5"
+        opacity="0.5"
+      />
+      
+      {/* Center circle */}
+      <circle 
+        cx="50" 
+        cy="50" 
+        r="18" 
+        fill="none" 
+        stroke="url(#goldGradient)" 
+        strokeWidth="2"
+      />
+      
+      {/* 20 in center */}
+      <text
+        x="50"
+        y="56"
+        textAnchor="middle"
+        fill="#ffd700"
+        fontSize="18"
+        fontWeight="bold"
+        fontFamily="serif"
+      >
+        20
+      </text>
     </svg>
+  );
+}
+
+// Dragon decoration
+function DragonDivider() {
+  return (
+    <div className="flex items-center gap-3 my-4 w-full max-w-xs">
+      <div className="flex-1 h-px bg-linear-to-r from-transparent via-amber-500/60 to-transparent" />
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-amber-400">
+        <path
+          d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z"
+          fill="currentColor"
+          opacity="0.9"
+        />
+      </svg>
+      <div className="flex-1 h-px bg-linear-to-r from-transparent via-amber-500/60 to-transparent" />
+    </div>
+  );
+}
+
+// Pre-computed particle positions to avoid hydration mismatch
+const PARTICLE_POSITIONS = [
+  { left: '15%', top: '20%', delay: '0s', duration: '6s' },
+  { left: '75%', top: '15%', delay: '1s', duration: '7s' },
+  { left: '25%', top: '70%', delay: '2s', duration: '5s' },
+  { left: '85%', top: '60%', delay: '0.5s', duration: '8s' },
+  { left: '45%', top: '30%', delay: '3s', duration: '6s' },
+  { left: '65%', top: '80%', delay: '1.5s', duration: '7s' },
+  { left: '35%', top: '45%', delay: '4s', duration: '5s' },
+  { left: '55%', top: '55%', delay: '2.5s', duration: '9s' },
+  { left: '20%', top: '85%', delay: '0.8s', duration: '6s' },
+  { left: '80%', top: '35%', delay: '3.5s', duration: '7s' },
+  { left: '40%', top: '10%', delay: '1.2s', duration: '8s' },
+  { left: '60%', top: '90%', delay: '4.5s', duration: '5s' },
+  { left: '30%', top: '25%', delay: '2.2s', duration: '6s' },
+  { left: '70%', top: '65%', delay: '0.3s', duration: '7s' },
+  { left: '50%', top: '50%', delay: '5s', duration: '8s' },
+];
+
+const SPARKLE_POSITIONS = [
+  { left: '10%', top: '15%', delay: '0s' },
+  { left: '90%', top: '25%', delay: '0.5s' },
+  { left: '20%', top: '75%', delay: '1s' },
+  { left: '80%', top: '85%', delay: '1.5s' },
+  { left: '50%', top: '40%', delay: '2s' },
+  { left: '30%', top: '60%', delay: '0.8s' },
+  { left: '70%', top: '20%', delay: '2.5s' },
+  { left: '40%', top: '90%', delay: '1.2s' },
+  { left: '60%', top: '10%', delay: '0.3s' },
+  { left: '85%', top: '55%', delay: '1.8s' },
+];
+
+// Floating magical particles for the welcome screen
+function WelcomeParticles() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {PARTICLE_POSITIONS.map((pos, i) => (
+        <div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-amber-400/50 animate-float"
+          style={{
+            left: pos.left,
+            top: pos.top,
+            animationDelay: pos.delay,
+            animationDuration: pos.duration,
+          }}
+        />
+      ))}
+      {SPARKLE_POSITIONS.map((pos, i) => (
+        <div
+          key={`spark-${i}`}
+          className="absolute w-0.5 h-0.5 rounded-full bg-purple-400/60 animate-sparkle"
+          style={{
+            left: pos.left,
+            top: pos.top,
+            animationDelay: pos.delay,
+          }}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -29,31 +175,93 @@ export const WelcomeView = ({
   ref,
 }: React.ComponentProps<'div'> & WelcomeViewProps) => {
   return (
-    <div ref={ref}>
-      <section className="bg-background flex flex-col items-center justify-center text-center">
-        <WelcomeImage />
+    <div ref={ref} className="relative h-svh w-full fantasy-bg">
+      {/* Animated stars */}
+      <div className="absolute inset-0 stars-bg opacity-70" />
+      
+      {/* Background gradients */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse 80% 50% at 50% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 30% 80%, rgba(107, 76, 138, 0.15) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 70% 90%, rgba(30, 58, 95, 0.15) 0%, transparent 50%)
+          `
+        }}
+      />
+      
+      {/* Floating particles */}
+      <WelcomeParticles />
+      
+      {/* Vignette */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(10, 6, 18, 0.7) 100%)'
+        }}
+      />
+      
+      <section className="flex flex-col items-center justify-center text-center px-6 py-8 relative z-10 min-h-screen">
+        <GameMasterIcon />
 
-        <p className="text-foreground max-w-prose pt-1 leading-6 font-medium">
-          Chat live with your voice AI agent
+        <h1 
+          className="text-4xl md:text-5xl font-bold mb-2 text-amber-300 tracking-wide drop-shadow-lg"
+          style={{ 
+            fontFamily: 'var(--font-fantasy)', 
+            textShadow: '0 2px 20px rgba(212, 175, 55, 0.5), 0 0 40px rgba(139, 92, 246, 0.3)' 
+          }}
+        >
+          Voice Game Master
+        </h1>
+
+        <DragonDivider />
+
+        <p 
+          className="text-amber-100/90 max-w-md leading-7 text-lg"
+          style={{ fontFamily: 'var(--font-narrative)' }}
+        >
+          Embark on an epic adventure in the mystical realm of{' '}
+          <span className="text-purple-300 font-semibold" style={{ textShadow: '0 0 10px rgba(139, 92, 246, 0.5)' }}>
+            Eldoria
+          </span>
         </p>
 
-        <Button variant="primary" size="lg" onClick={onStartCall} className="mt-6 w-64 font-mono">
-          {startButtonText}
-        </Button>
+        <p 
+          className="text-amber-200/60 max-w-sm pt-3 text-base leading-6 italic"
+          style={{ fontFamily: 'var(--font-narrative)' }}
+        >
+          Speak your actions aloud as the Game Master guides you through a tale of dragons, magic, and destiny
+        </p>
+
+        <button 
+          onClick={onStartCall} 
+          className="restart-btn mt-10 px-10 py-4 text-lg rounded-xl glow-pulse transition-transform hover:scale-105"
+          style={{ fontFamily: 'var(--font-fantasy)' }}
+        >
+          ⚔️ {startButtonText} ⚔️
+        </button>
+
+        {/* Decorative frame corners */}
+        <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-amber-500/40 rounded-tl-lg" />
+        <div className="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-amber-500/40 rounded-tr-lg" />
+        <div className="absolute bottom-24 left-8 w-16 h-16 border-l-2 border-b-2 border-amber-500/40 rounded-bl-lg" />
+        <div className="absolute bottom-24 right-8 w-16 h-16 border-r-2 border-b-2 border-amber-500/40 rounded-br-lg" />
+        
+        {/* Top decorative element */}
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
+          <div className="w-20 h-px bg-linear-to-r from-transparent to-amber-500/50" />
+          <div className="w-2 h-2 rotate-45 bg-amber-500/60" />
+          <div className="w-20 h-px bg-linear-to-l from-transparent to-amber-500/50" />
+        </div>
       </section>
 
-      <div className="fixed bottom-5 left-0 flex w-full items-center justify-center">
-        <p className="text-muted-foreground max-w-prose pt-1 text-xs leading-5 font-normal text-pretty md:text-sm">
-          Need help getting set up? Check out the{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://docs.livekit.io/agents/start/voice-ai/"
-            className="underline"
-          >
-            Voice AI quickstart
-          </a>
-          .
+      <div className="fixed bottom-5 left-0 flex w-full items-center justify-center z-20">
+        <p 
+          className="text-amber-400/50 max-w-prose pt-1 text-xs leading-5 font-normal text-pretty md:text-sm"
+          style={{ fontFamily: 'var(--font-fantasy)', letterSpacing: '0.1em' }}
+        >
+          ✦ Day 8 Challenge: Voice Game Master ✦
         </p>
       </div>
     </div>

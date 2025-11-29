@@ -59,6 +59,129 @@ const classNames = {
   secondTileChatClosed: ['col-start-2 row-start-3', 'place-content-end'],
 };
 
+// Fantasy Orb Visualizer Component
+function MagicOrbVisualizer({ 
+  state, 
+  trackRef, 
+  isLarge = false 
+}: { 
+  state: string; 
+  trackRef: TrackReference | undefined;
+  isLarge?: boolean;
+}) {
+  const isActive = state === 'speaking' || state === 'listening';
+  const isSpeaking = state === 'speaking';
+  
+  return (
+    <div className={cn(
+      "relative flex items-center justify-center",
+      isLarge ? "w-72 h-72 md:w-96 md:h-96" : "w-24 h-24"
+    )}>
+      {/* Outer magical aura rings */}
+      <div className={cn(
+        "absolute rounded-full border-2 border-purple-500/30 transition-all duration-1000",
+        isLarge ? "w-80 h-80 md:w-[420px] md:h-[420px]" : "w-28 h-28",
+        isSpeaking && "animate-pulse border-purple-400/50"
+      )} />
+      <div className={cn(
+        "absolute rounded-full border border-amber-400/20 transition-all duration-700",
+        isLarge ? "w-[350px] h-[350px] md:w-[460px] md:h-[460px]" : "w-32 h-32",
+        isActive && "animate-spin",
+        isActive ? "animation-duration-[20s]" : "animation-duration-[60s]"
+      )} style={{ animationDirection: 'reverse' }} />
+      
+      {/* Magical particles orbiting */}
+      {isActive && (
+        <>
+          <div className={cn(
+            "absolute rounded-full bg-amber-400/60 animate-[orbit_3s_linear_infinite]",
+            isLarge ? "w-3 h-3" : "w-1.5 h-1.5"
+          )} style={{ 
+            transformOrigin: isLarge ? '180px center' : '55px center',
+          }} />
+          <div className={cn(
+            "absolute rounded-full bg-purple-400/60 animate-[orbit_4s_linear_infinite_reverse]",
+            isLarge ? "w-2 h-2" : "w-1 h-1"
+          )} style={{ 
+            transformOrigin: isLarge ? '160px center' : '50px center',
+            animationDelay: '-1s'
+          }} />
+          <div className={cn(
+            "absolute rounded-full bg-cyan-400/60 animate-[orbit_5s_linear_infinite]",
+            isLarge ? "w-2.5 h-2.5" : "w-1 h-1"
+          )} style={{ 
+            transformOrigin: isLarge ? '200px center' : '60px center',
+            animationDelay: '-2s'
+          }} />
+        </>
+      )}
+      
+      {/* Main crystal orb */}
+      <div className={cn(
+        "relative rounded-full overflow-hidden",
+        isLarge ? "w-52 h-52 md:w-64 md:h-64" : "w-16 h-16",
+        "bg-linear-to-br from-purple-900/80 via-indigo-800/70 to-purple-950/90",
+        "border-2 border-amber-400/40",
+        "shadow-[0_0_60px_rgba(139,92,246,0.4),inset_0_0_60px_rgba(139,92,246,0.2)]",
+        isSpeaking && "shadow-[0_0_80px_rgba(139,92,246,0.6),inset_0_0_80px_rgba(139,92,246,0.3)]"
+      )}>
+        {/* Inner glow effect */}
+        <div className={cn(
+          "absolute rounded-full bg-purple-400/20 blur-xl transition-all duration-300",
+          isLarge ? "top-8 left-8 w-24 h-24" : "top-2 left-2 w-8 h-8",
+          isSpeaking && "bg-purple-300/40"
+        )} />
+        
+        {/* Reflection highlight */}
+        <div className={cn(
+          "absolute rounded-full bg-white/30",
+          isLarge ? "top-6 left-10 w-10 h-8 blur-md" : "top-2 left-3 w-4 h-2.5 blur-sm"
+        )} />
+        
+        {/* Core magical energy - using BarVisualizer */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <BarVisualizer
+            barCount={isLarge ? 7 : 5}
+            state={state}
+            options={{ minHeight: isLarge ? 10 : 5 }}
+            trackRef={trackRef}
+            className="flex h-full items-center justify-center gap-1"
+          >
+            <span
+              className={cn([
+                'rounded-full transition-all duration-250 ease-linear',
+                isLarge ? 'min-h-4 w-3' : 'min-h-2.5 w-2.5',
+                'bg-amber-400/60',
+                'data-[lk-highlighted=true]:bg-amber-300 data-[lk-muted=true]:bg-purple-600/50',
+                isSpeaking && 'shadow-[0_0_10px_rgba(251,191,36,0.6)]'
+              ])}
+            />
+          </BarVisualizer>
+        </div>
+        
+        {/* Swirling mist effect */}
+        <div className={cn(
+          "absolute inset-0 opacity-30",
+          "bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(139,92,246,0.3)_100%)]",
+          isActive && "animate-pulse"
+        )} />
+      </div>
+      
+      {/* State indicator runes */}
+      <div className={cn(
+        "absolute font-fantasy text-amber-400/80 tracking-widest uppercase",
+        isLarge ? "-bottom-10 text-sm" : "-bottom-5 text-[8px]"
+      )} style={{ fontFamily: 'var(--font-fantasy)' }}>
+        {state === 'speaking' && '✦ Speaking ✦'}
+        {state === 'listening' && '⟡ Listening ⟡'}
+        {state === 'thinking' && '◈ Thinking ◈'}
+        {state === 'idle' && '○ Awaiting ○'}
+        {state === 'connecting' && '◇ Summoning ◇'}
+      </div>
+    </div>
+  );
+}
+
 export function useLocalTrackRef(source: Track.Source) {
   const { localParticipant } = useLocalParticipant();
   const publication = localParticipant.getTrackPublication(source);
@@ -92,7 +215,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
   const videoHeight = agentVideoTrack?.publication.dimensions?.height ?? 0;
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-8 bottom-32 z-50 md:top-12 md:bottom-40">
+    <div className="pointer-events-none fixed inset-x-0 top-8 bottom-32 z-30 md:top-12 md:bottom-40">
       <div className="relative mx-auto h-full max-w-2xl px-4 md:px-0">
         <div className={cn(classNames.grid)}>
           {/* Agent */}
@@ -106,7 +229,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
           >
             <AnimatePresence mode="popLayout">
               {!isAvatar && (
-                // Audio Agent
+                // Audio Agent - Magic Orb Visualizer
                 <MotionContainer
                   key="agent"
                   layoutId="agent"
@@ -116,32 +239,19 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                   }}
                   animate={{
                     opacity: 1,
-                    scale: chatOpen ? 1 : 5,
+                    scale: 1,
                   }}
                   transition={{
                     ...ANIMATION_TRANSITION,
                     delay: animationDelay,
                   }}
-                  className={cn(
-                    'bg-background aspect-square h-[90px] rounded-md border border-transparent transition-[border,drop-shadow]',
-                    chatOpen && 'border-input/50 drop-shadow-lg/10 delay-200'
-                  )}
+                  className="flex items-center justify-center"
                 >
-                  <BarVisualizer
-                    barCount={5}
-                    state={agentState}
-                    options={{ minHeight: 5 }}
+                  <MagicOrbVisualizer 
+                    state={agentState} 
                     trackRef={agentAudioTrack}
-                    className={cn('flex h-full items-center justify-center gap-1')}
-                  >
-                    <span
-                      className={cn([
-                        'bg-muted min-h-2.5 w-2.5 rounded-full',
-                        'origin-center transition-colors duration-250 ease-linear',
-                        'data-[lk-highlighted=true]:bg-foreground data-[lk-muted=true]:bg-muted',
-                      ])}
-                    />
-                  </BarVisualizer>
+                    isLarge={!chatOpen}
+                  />
                 </MotionContainer>
               )}
 
@@ -174,7 +284,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     },
                   }}
                   className={cn(
-                    'overflow-hidden bg-black drop-shadow-xl/80',
+                    'overflow-hidden bg-black drop-shadow-xl/80 border-2 border-amber-400/40',
                     chatOpen ? 'h-[90px]' : 'h-auto w-full'
                   )}
                 >
@@ -225,7 +335,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     trackRef={cameraTrack || screenShareTrack}
                     width={(cameraTrack || screenShareTrack)?.publication.dimensions?.width ?? 0}
                     height={(cameraTrack || screenShareTrack)?.publication.dimensions?.height ?? 0}
-                    className="bg-muted aspect-square w-[90px] rounded-md object-cover"
+                    className="bg-muted aspect-square w-[90px] rounded-md object-cover border-2 border-amber-400/30"
                   />
                 </MotionContainer>
               )}
