@@ -4,11 +4,11 @@ import { useRef } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useRoomContext } from '@livekit/components-react';
 import { useSession } from '@/components/app/session-provider';
-import { SessionView } from '@/components/app/session-view';
+import { CommerceSessionView } from '@/components/commerce/CommerceSessionView';
 import { WelcomeView } from '@/components/app/welcome-view';
 
 const MotionWelcomeView = motion.create(WelcomeView);
-const MotionSessionView = motion.create(SessionView);
+const MotionSessionView = motion.create(CommerceSessionView);
 
 const VIEW_MOTION_PROPS = {
   variants: {
@@ -24,7 +24,7 @@ const VIEW_MOTION_PROPS = {
   exit: 'hidden',
   transition: {
     duration: 0.5,
-    ease: 'linear',
+    ease: 'linear' as const,
   },
 };
 

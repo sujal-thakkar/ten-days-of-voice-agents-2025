@@ -3,7 +3,10 @@
 import { type HTMLAttributes, useCallback, useState } from 'react';
 import { Track } from 'livekit-client';
 import { useChat, useRemoteParticipants } from '@livekit/components-react';
-import { ChatTextIcon, PhoneDisconnectIcon } from '@phosphor-icons/react/dist/ssr';
+import { 
+  ChatTextIcon, 
+  PhoneDisconnectIcon,
+} from '@phosphor-icons/react/dist/ssr';
 import { useSession } from '@/components/app/session-provider';
 import { TrackToggle } from '@/components/livekit/agent-control-bar/track-toggle';
 import { Button } from '@/components/livekit/button';
@@ -89,7 +92,7 @@ export function AgentControlBar({
     <div
       aria-label="Voice assistant controls"
       className={cn(
-        'bg-background border-input/50 dark:border-muted flex flex-col rounded-[31px] border p-3 drop-shadow-md/3',
+        'flex flex-col p-4',
         className
       )}
       {...props}
@@ -103,9 +106,10 @@ export function AgentControlBar({
         />
       )}
 
-      <div className="flex gap-1">
-        <div className="flex grow gap-1">
-          {/* Toggle Microphone */}
+      <div className="flex items-center justify-center gap-3">
+        {/* Control Buttons Group */}
+        <div className="flex items-center gap-1.5 bg-black/40 rounded-2xl p-1.5">
+          {/* Toggle Microphone with Visualizer */}
           {visibleControls.microphone && (
             <TrackSelector
               kind="audioinput"
@@ -117,21 +121,31 @@ export function AgentControlBar({
               onPressedChange={microphoneToggle.toggle}
               onMediaDeviceError={handleMicrophoneDeviceSelectError}
               onActiveDeviceChange={handleAudioDeviceChange}
+              className={cn(
+                'rounded-xl transition-all duration-300 border-0',
+                microphoneToggle.enabled 
+                  ? 'bg-linear-to-br from-violet-500 to-purple-600 text-white shadow-lg shadow-purple-500/40' 
+                  : 'bg-white/10 text-white/60 hover:bg-white/20 hover:text-white'
+              )}
             />
           )}
 
           {/* Toggle Camera */}
           {visibleControls.camera && (
-            <TrackSelector
-              kind="videoinput"
+            <TrackToggle
+              size="icon"
+              variant="secondary"
               aria-label="Toggle camera"
               source={Track.Source.Camera}
               pressed={cameraToggle.enabled}
-              pending={cameraToggle.pending}
               disabled={cameraToggle.pending}
               onPressedChange={cameraToggle.toggle}
-              onMediaDeviceError={handleCameraDeviceSelectError}
-              onActiveDeviceChange={handleVideoDeviceChange}
+              className={cn(
+                'size-11 rounded-xl transition-all duration-300 border-0 flex items-center justify-center',
+                cameraToggle.enabled 
+                  ? 'bg-linear-to-br from-blue-500 to-cyan-600 text-white shadow-lg shadow-blue-500/40' 
+                  : 'bg-white/10 text-white/60 hover:bg-white/20 hover:text-white'
+              )}
             />
           )}
 
@@ -145,8 +159,17 @@ export function AgentControlBar({
               pressed={screenShareToggle.enabled}
               disabled={screenShareToggle.pending}
               onPressedChange={screenShareToggle.toggle}
+              className={cn(
+                'size-11 rounded-xl transition-all duration-300 border-0 flex items-center justify-center',
+                screenShareToggle.enabled 
+                  ? 'bg-linear-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/40' 
+                  : 'bg-white/10 text-white/60 hover:bg-white/20 hover:text-white'
+              )}
             />
           )}
+
+          {/* Divider */}
+          <div className="w-px h-7 bg-white/20 mx-0.5" />
 
           {/* Toggle Transcript */}
           <Toggle
@@ -155,23 +178,35 @@ export function AgentControlBar({
             aria-label="Toggle transcript"
             pressed={chatOpen}
             onPressedChange={handleToggleTranscript}
+            className={cn(
+              'size-11 rounded-xl transition-all duration-300 border-0 flex items-center justify-center',
+              chatOpen 
+                ? 'bg-linear-to-br from-amber-500 to-orange-600 text-white shadow-lg shadow-amber-500/40' 
+                : 'bg-white/10 text-white/60 hover:bg-white/20 hover:text-white'
+            )}
           >
-            <ChatTextIcon weight="bold" />
+            <ChatTextIcon weight="bold" className="size-5" />
           </Toggle>
         </div>
 
-        {/* Disconnect */}
+        {/* Disconnect Button - Redesigned */}
         {visibleControls.leave && (
-          <Button
-            variant="destructive"
+          <button
             onClick={handleDisconnect}
             disabled={!isSessionActive}
-            className="font-mono"
+            className={cn(
+              'h-11 px-5 rounded-xl font-bold text-sm tracking-wide',
+              'bg-red-500 hover:bg-red-600 active:bg-red-700',
+              'text-white shadow-xl shadow-red-500/30',
+              'border border-red-400/30',
+              'transition-all duration-200',
+              'flex items-center justify-center gap-2',
+              'disabled:opacity-50 disabled:cursor-not-allowed'
+            )}
           >
-            <PhoneDisconnectIcon weight="bold" />
-            <span className="hidden md:inline">END CALL</span>
-            <span className="inline md:hidden">END</span>
-          </Button>
+            <PhoneDisconnectIcon weight="bold" className="size-5" />
+            <span className="hidden sm:inline">End Call</span>
+          </button>
         )}
       </div>
     </div>

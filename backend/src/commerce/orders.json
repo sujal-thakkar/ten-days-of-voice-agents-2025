@@ -1,0 +1,134 @@
+[
+  {
+    "id": "ORD-B1723300",
+    "items": [
+      {
+        "product_id": "hoodie-001",
+        "product_name": "Classic Pullover Hoodie",
+        "quantity": 1,
+        "size": "M",
+        "unit_price": 1499,
+        "item_total": 1499,
+        "currency": "INR"
+      }
+    ],
+    "item_count": 1,
+    "subtotal": 1499,
+    "total": 1499,
+    "currency": "INR",
+    "status": "confirmed",
+    "session_id": "test-session",
+    "customer_notes": null,
+    "created_at": "2025-11-30T18:59:31.735953"
+  },
+  {
+    "id": "ORD-5FAC1A29",
+    "items": [
+      {
+        "product_id": "hoodie-002",
+        "product_name": "Zip-Up Sports Hoodie",
+        "quantity": 1,
+        "size": "M",
+        "unit_price": 1299,
+        "item_total": 1299,
+        "currency": "INR"
+      }
+    ],
+    "item_count": 1,
+    "subtotal": 1299,
+    "total": 1299,
+    "currency": "INR",
+    "status": "confirmed",
+    "session_id": "voice_assistant_room_1174",
+    "customer_notes": null,
+    "created_at": "2025-11-30T19:19:02.936802"
+  },
+  {
+    "id": "ORD-95D32109",
+    "items": [
+      {
+        "product_id": "hoodie-003",
+        "product_name": "Oversized Streetwear Hoodie",
+        "quantity": 1,
+        "size": "M",
+        "unit_price": 1799,
+        "item_total": 1799,
+        "currency": "INR"
+      }
+    ],
+    "item_count": 1,
+    "subtotal": 1799,
+    "total": 1799,
+    "currency": "INR",
+    "status": "confirmed",
+    "session_id": "voice_assistant_room_5079",
+    "customer_notes": null,
+    "created_at": "2025-11-30T21:35:52.430558"
+  },
+  {
+    "id": "ORD-967E7F5C",
+    "items": [
+      {
+        "product_id": "bottle-001",
+        "product_name": "Stainless Steel Water Bottle",
+        "quantity": 2,
+        "size": "NA",
+        "unit_price": 899,
+        "item_total": 1798,
+        "currency": "INR"
+      }
+    ],
+    "item_count": 2,
+    "subtotal": 1798,
+    "total": 1798,
+    "currency": "INR",
+    "status": "confirmed",
+    "session_id": "voice_assistant_room_7232",
+    "customer_notes": null,
+    "created_at": "2025-11-30T21:51:54.942670"
+  },
+  {
+    "id": "ORD-9C8D83A3",
+    "items": [
+      {
+        "product_id": "hoodie-001",
+        "product_name": "Classic Pullover Hoodie",
+        "quantity": 1,
+        "size": "M",
+        "unit_price": 1499,
+        "item_total": 1499,
+        "currency": "INR"
+      }
+    ],
+    "item_count": 1,
+    "subtotal": 1499,
+    "total": 1499,
+    "currency": "INR",
+    "status": "confirmed",
+    "session_id": "voice_assistant_room_6355",
+    "customer_notes": null,
+    "created_at": "2025-11-30T22:56:28.945856"
+  },
+  {
+    "id": "ORD-D9566D6C",
+    "items": [
+      {
+        "product_id": "bottle-002",
+        "product_name": "Glass Water Bottle",
+        "quantity": 1,
+        "size": "NA",
+        "unit_price": 599,
+        "item_total": 599,
+        "currency": "INR"
+      }
+    ],
+    "item_count": 1,
+    "subtotal": 599,
+    "total": 599,
+    "currency": "INR",
+    "status": "confirmed",
+    "session_id": "voice_assistant_room_6355",
+    "customer_notes": null,
+    "created_at": "2025-11-30T22:56:57.320883"
+  }
+]
