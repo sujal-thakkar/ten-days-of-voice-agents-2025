@@ -29,19 +29,27 @@ export async function POST(req: Request) {
       throw new Error('LIVEKIT_API_SECRET is not defined');
     }
 
-    // Parse agent configuration from request body
+    // Parse agent configuration and player name from request body
     const body = await req.json();
     const agentName: string = body?.room_config?.agents?.[0]?.agent_name;
+    const playerName: string | undefined = body?.player_name;
 
     // Generate participant token
-    const participantName = 'user';
-    const participantIdentity = `voice_assistant_user_${Math.floor(Math.random() * 10_000)}`;
-    const roomName = `voice_assistant_room_${Math.floor(Math.random() * 10_000)}`;
+    const participantName = playerName || 'Contestant';
+    const participantIdentity = `improv_player_${Math.floor(Math.random() * 10_000)}`;
+    const roomName = `improv_battle_${Math.floor(Math.random() * 10_000)}`;
+
+    // Create room metadata with player name for the agent to access
+    const roomMetadata = JSON.stringify({
+      player_name: playerName || null,
+      game_type: 'improv_battle',
+    });
 
     const participantToken = await createParticipantToken(
       { identity: participantIdentity, name: participantName },
       roomName,
-      agentName
+      agentName,
+      roomMetadata
     );
 
     // Return connection details
@@ -66,7 +74,8 @@ export async function POST(req: Request) {
 function createParticipantToken(
   userInfo: AccessTokenOptions,
   roomName: string,
-  agentName?: string
+  agentName?: string,
+  roomMetadata?: string
 ): Promise<string> {
   const at = new AccessToken(API_KEY, API_SECRET, {
     ...userInfo,
@@ -78,14 +87,15 @@ function createParticipantToken(
     canPublish: true,
     canPublishData: true,
     canSubscribe: true,
+    canUpdateOwnMetadata: true,
   };
   at.addGrant(grant);
 
-  if (agentName) {
-    at.roomConfig = new RoomConfiguration({
-      agents: [{ agentName }],
-    });
-  }
+  // Set room configuration with agent and metadata
+  at.roomConfig = new RoomConfiguration({
+    agents: agentName ? [{ agentName }] : undefined,
+    metadata: roomMetadata,
+  });
 
   return at.toJwt();
 }

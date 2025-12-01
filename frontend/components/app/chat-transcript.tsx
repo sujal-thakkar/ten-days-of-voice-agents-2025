@@ -8,43 +8,18 @@ const MotionContainer = motion.create('div');
 const MotionChatEntry = motion.create(ChatEntry);
 
 const CONTAINER_MOTION_PROPS = {
-  variants: {
-    hidden: {
-      opacity: 0,
-      transition: {
-        ease: 'easeOut',
-        duration: 0.3,
-        staggerChildren: 0.1,
-        staggerDirection: -1,
-      },
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.2,
-        ease: 'easeOut',
-        duration: 0.3,
-        stagerDelay: 0.2,
-        staggerChildren: 0.1,
-        staggerDirection: 1,
-      },
-    },
-  },
-  initial: 'hidden',
-  animate: 'visible',
-  exit: 'hidden',
+  initial: { opacity: 1 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
 };
 
 const MESSAGE_MOTION_PROPS = {
-  variants: {
-    hidden: {
-      opacity: 0,
-      translateY: 10,
-    },
-    visible: {
-      opacity: 1,
-      translateY: 0,
-    },
+  initial: { opacity: 0, translateY: 10 },
+  animate: { opacity: 1, translateY: 0 },
+  exit: { opacity: 0, translateY: -10 },
+  transition: {
+    duration: 0.2,
+    ease: 'easeOut',
   },
 };
 

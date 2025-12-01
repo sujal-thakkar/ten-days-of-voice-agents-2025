@@ -7,6 +7,7 @@ export function useRoom(appConfig: AppConfig) {
   const aborted = useRef(false);
   const room = useMemo(() => new Room(), []);
   const [isSessionActive, setIsSessionActive] = useState(false);
+  const playerNameRef = useRef<string | undefined>(undefined);
 
   useEffect(() => {
     function onDisconnected() {
@@ -36,39 +37,37 @@ export function useRoom(appConfig: AppConfig) {
     };
   }, [room]);
 
-  const tokenSource = useMemo(
-    () =>
-      TokenSource.custom(async () => {
-        const url = new URL(
-          process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? '/api/connection-details',
-          window.location.origin
-        );
+  const fetchConnectionDetails = useCallback(async () => {
+    const url = new URL(
+      process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ?? '/api/connection-details',
+      window.location.origin
+    );
 
-        try {
-          const res = await fetch(url.toString(), {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Sandbox-Id': appConfig.sandboxId ?? '',
-            },
-            body: JSON.stringify({
-              room_config: appConfig.agentName
-                ? {
-                    agents: [{ agent_name: appConfig.agentName }],
-                  }
-                : undefined,
-            }),
-          });
-          return await res.json();
-        } catch (error) {
-          console.error('Error fetching connection details:', error);
-          throw new Error('Error fetching connection details!');
-        }
-      }),
-    [appConfig]
-  );
+    try {
+      const res = await fetch(url.toString(), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Sandbox-Id': appConfig.sandboxId ?? '',
+        },
+        body: JSON.stringify({
+          room_config: appConfig.agentName
+            ? {
+                agents: [{ agent_name: appConfig.agentName }],
+              }
+            : undefined,
+          player_name: playerNameRef.current,
+        }),
+      });
+      return await res.json();
+    } catch (error) {
+      console.error('Error fetching connection details:', error);
+      throw new Error('Error fetching connection details!');
+    }
+  }, [appConfig]);
 
-  const startSession = useCallback(() => {
+  const startSession = useCallback((playerName?: string) => {
+    playerNameRef.current = playerName;
     setIsSessionActive(true);
 
     if (room.state === 'disconnected') {
@@ -77,11 +76,9 @@ export function useRoom(appConfig: AppConfig) {
         room.localParticipant.setMicrophoneEnabled(true, undefined, {
           preConnectBuffer: isPreConnectBufferEnabled,
         }),
-        tokenSource
-          .fetch({ agentName: appConfig.agentName })
-          .then((connectionDetails) =>
-            room.connect(connectionDetails.serverUrl, connectionDetails.participantToken)
-          ),
+        fetchConnectionDetails().then((connectionDetails) =>
+          room.connect(connectionDetails.serverUrl, connectionDetails.participantToken)
+        ),
       ]).catch((error) => {
         if (aborted.current) {
           // Once the effect has cleaned up after itself, drop any errors
@@ -98,7 +95,7 @@ export function useRoom(appConfig: AppConfig) {
         });
       });
     }
-  }, [room, appConfig, tokenSource]);
+  }, [room, appConfig, fetchConnectionDetails]);
 
   const endSession = useCallback(() => {
     setIsSessionActive(false);

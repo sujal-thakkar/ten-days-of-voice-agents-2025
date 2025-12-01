@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useRoomContext } from '@livekit/components-react';
 import { useSession } from '@/components/app/session-provider';
@@ -43,6 +43,11 @@ export function ViewController() {
     }
   };
 
+  // Handle start with player name
+  const handleStartCall = useCallback((playerName?: string) => {
+    startSession(playerName);
+  }, [startSession]);
+
   return (
     <AnimatePresence mode="wait">
       {/* Welcome screen */}
@@ -51,7 +56,7 @@ export function ViewController() {
           key="welcome"
           {...VIEW_MOTION_PROPS}
           startButtonText={appConfig.startButtonText}
-          onStartCall={startSession}
+          onStartCall={handleStartCall}
         />
       )}
       {/* Session view */}

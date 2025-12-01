@@ -65,11 +65,11 @@ export function ChatInput({
       inert={!chatOpen}
       {...MOTION_PROPS}
       animate={chatOpen ? 'visible' : 'hidden'}
-      className="border-input/50 flex w-full items-start overflow-hidden border-b"
+      className="flex w-full items-start overflow-hidden"
     >
       <form
         onSubmit={handleSubmit}
-        className="mb-3 flex grow items-end gap-2 rounded-md pl-1 text-sm"
+        className="flex grow items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2 text-sm mb-2"
       >
         <input
           autoFocus
@@ -77,9 +77,9 @@ export function ChatInput({
           type="text"
           value={message}
           disabled={!chatOpen}
-          placeholder="Type something..."
+          placeholder="Type your response or say something..."
           onChange={(e) => setMessage(e.target.value)}
-          className="h-8 flex-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          className="h-8 flex-1 bg-transparent text-white placeholder:text-white/40 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         />
         <Button
           size="icon"
@@ -87,12 +87,12 @@ export function ChatInput({
           disabled={isDisabled}
           variant={isDisabled ? 'secondary' : 'primary'}
           title={isSending ? 'Sending...' : 'Send'}
-          className="self-start"
+          className="rounded-lg bg-amber-500/80 hover:bg-amber-500 border-amber-400/30 disabled:bg-white/10 disabled:border-white/10 transition-all duration-200"
         >
           {isSending ? (
-            <SpinnerIcon className="animate-spin" weight="bold" />
+            <SpinnerIcon className="animate-spin text-white" weight="bold" />
           ) : (
-            <PaperPlaneRightIcon weight="bold" />
+            <PaperPlaneRightIcon className="text-white" weight="bold" />
           )}
         </Button>
       </form>

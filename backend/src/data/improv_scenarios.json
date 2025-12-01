@@ -1,0 +1,86 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "title": "Time-Travelling Tour Guide",
+      "description": "You are a time-travelling tour guide explaining modern smartphones to someone from the 1800s.",
+      "tension": "The person from the past keeps asking increasingly difficult questions about this 'magical rectangle'"
+    },
+    {
+      "id": 2,
+      "title": "Escaped Order",
+      "description": "You are a restaurant waiter who must calmly tell a customer that their order has escaped the kitchen.",
+      "tension": "The customer is getting impatient and you must keep them calm while the kitchen staff chase down the runaway lobster"
+    },
+    {
+      "id": 3,
+      "title": "Cursed Return",
+      "description": "You are a customer trying to return an obviously cursed object to a very skeptical shop owner.",
+      "tension": "The curse keeps manifesting while you try to explain why you deserve a refund"
+    },
+    {
+      "id": 4,
+      "title": "Dimensional Latte",
+      "description": "You are a barista who has to tell a customer that their latte is actually a portal to another dimension.",
+      "tension": "Strange creatures keep peeking out of the coffee cup while you try to explain the situation professionally"
+    },
+    {
+      "id": 5,
+      "title": "Alien Job Interview",
+      "description": "You are an alien trying to blend in during a job interview at a regular Earth company.",
+      "tension": "You keep accidentally revealing your alien nature while trying to seem like a normal human candidate"
+    },
+    {
+      "id": 6,
+      "title": "Superhero Secret Identity",
+      "description": "You are a superhero whose secret identity was just discovered by your extremely nosy neighbor.",
+      "tension": "You must convince them not to tell anyone while they keep asking increasingly embarrassing questions about your powers"
+    },
+    {
+      "id": 7,
+      "title": "Pet Shop Problem",
+      "description": "You are a pet shop employee who must explain to a customer that the 'puppy' they're interested in is actually a baby dragon.",
+      "tension": "The dragon keeps trying to set things on fire while you maintain your professional sales pitch"
+    },
+    {
+      "id": 8,
+      "title": "Haunted House Tour",
+      "description": "You are a real estate agent trying to sell a very obviously haunted house to potential buyers.",
+      "tension": "The ghosts keep interrupting your sales pitch in increasingly dramatic ways"
+    },
+    {
+      "id": 9,
+      "title": "Robot Therapist",
+      "description": "You are a malfunctioning robot therapist trying to give advice to a human patient.",
+      "tension": "Your programming keeps glitching at the worst moments, mixing therapy advice with random commands"
+    },
+    {
+      "id": 10,
+      "title": "Medieval Tech Support",
+      "description": "You are a medieval peasant who has accidentally time-traveled to a modern tech support call center.",
+      "tension": "You must help callers with their computer problems using only your knowledge of medieval technology"
+    },
+    {
+      "id": 11,
+      "title": "Weather Wizard",
+      "description": "You are a weather wizard doing the morning forecast on local news, but your magic keeps going haywire.",
+      "tension": "Every forecast you give starts accidentally coming true right there in the studio"
+    },
+    {
+      "id": 12,
+      "title": "Talking Furniture",
+      "description": "You are a piece of furniture that has suddenly gained consciousness and must explain to your owner why you deserve better treatment.",
+      "tension": "Other furniture in the room keeps chiming in with their own complaints"
+    }
+  ],
+  "host_reaction_tones": [
+    "amused",
+    "impressed",
+    "mildly critical",
+    "pleasantly surprised",
+    "playfully teasing",
+    "genuinely entertained",
+    "slightly underwhelmed",
+    "constructively honest"
+  ]
+}
