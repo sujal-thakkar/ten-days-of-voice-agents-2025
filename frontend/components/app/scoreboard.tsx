@@ -135,7 +135,8 @@ function CurrentScenarioCard({ scenario, round, maxRounds }: {
 
 export function Scoreboard({ gameState, className }: ScoreboardProps) {
   const hasRounds = gameState.rounds.length > 0;
-  const isPlaying = gameState.phase === 'awaiting_improv' || gameState.phase === 'reacting';
+  // Show scenario during intro (after first scenario is set), awaiting_improv, or reacting phases
+  const showScenario = gameState.phase === 'intro' || gameState.phase === 'awaiting_improv' || gameState.phase === 'reacting';
   
   return (
     <div className={cn('flex flex-col h-full', className)}>
@@ -166,7 +167,7 @@ export function Scoreboard({ gameState, className }: ScoreboardProps) {
       
       {/* Current Scenario */}
       <AnimatePresence mode="wait">
-        {isPlaying && gameState.current_scenario && (
+        {showScenario && gameState.current_scenario && (
           <div className="mb-4">
             <CurrentScenarioCard 
               scenario={gameState.current_scenario}
@@ -191,7 +192,7 @@ export function Scoreboard({ gameState, className }: ScoreboardProps) {
               </span>
               <div className="space-y-2">
                 {gameState.rounds.map((round, index) => (
-                  <RoundCard key={round.round_number} round={round} index={index} />
+                  <RoundCard key={`round-${index}`} round={round} index={index} />
                 ))}
               </div>
             </MotionDiv>
@@ -199,7 +200,7 @@ export function Scoreboard({ gameState, className }: ScoreboardProps) {
         </AnimatePresence>
         
         {/* Empty state */}
-        {!hasRounds && !isPlaying && (
+        {!hasRounds && !showScenario && (
           <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

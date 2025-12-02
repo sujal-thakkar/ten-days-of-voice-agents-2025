@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRoomContext } from '@livekit/components-react';
+import type { TextStreamReader } from 'livekit-client';
+import { RoomEvent, ConnectionState } from 'livekit-client';
 
 const GAME_STATE_TOPIC = 'improv-game-state';
 
@@ -46,12 +48,25 @@ export function useGameState() {
   const isRegisteredRef = useRef(false);
 
   const handleTextStream = useCallback(
-    async (reader: any, participantInfo: any) => {
+    async (reader: TextStreamReader, participantInfo: { identity: string }) => {
       try {
+        console.log('[GameState] Received text stream from:', participantInfo.identity);
+        console.log('[GameState] Stream info:', reader.info);
+        
         const text = await reader.readAll();
+        console.log('[GameState] Raw text received:', text);
+        
         const data = JSON.parse(text);
+        console.log('[GameState] Parsed data:', data);
         
         if (data.type === 'game_state') {
+          console.log('[GameState] Updating game state:', {
+            phase: data.phase,
+            round: data.current_round,
+            score: data.total_score,
+            rounds: data.rounds?.length || 0,
+          });
+          
           setGameState({
             player_name: data.player_name,
             current_round: data.current_round,
@@ -63,50 +78,79 @@ export function useGameState() {
           });
         }
       } catch (error) {
-        console.error('Error parsing game state:', error);
+        console.error('[GameState] Error parsing game state:', error);
       }
     },
     []
   );
 
+  // Register handler when room state changes to connected
   useEffect(() => {
-    if (!room) return;
-    
-    // Prevent duplicate registration for the same room instance
-    if (registeredRooms.has(room) || isRegisteredRef.current) {
+    if (!room) {
+      console.log('[GameState] No room context available');
       return;
     }
 
-    try {
-      // Register the text stream handler for game state updates
-      room.registerTextStreamHandler(GAME_STATE_TOPIC, handleTextStream);
-      registeredRooms.add(room);
-      isRegisteredRef.current = true;
-    } catch (error) {
-      // Handler already registered, ignore
-      console.warn('Game state handler already registered');
+    const registerHandler = () => {
+      // Prevent duplicate registration for the same room instance
+      if (registeredRooms.has(room) || isRegisteredRef.current) {
+        console.log('[GameState] Handler already registered, skipping');
+        return;
+      }
+
+      try {
+        console.log('[GameState] Registering text stream handler for topic:', GAME_STATE_TOPIC);
+        console.log('[GameState] Room state:', room.state);
+        // Register the text stream handler for game state updates
+        room.registerTextStreamHandler(GAME_STATE_TOPIC, handleTextStream);
+        registeredRooms.add(room);
+        isRegisteredRef.current = true;
+        console.log('[GameState] Handler registered successfully');
+      } catch (error) {
+        // Handler already registered, ignore
+        console.warn('[GameState] Failed to register handler:', error);
+      }
+    };
+
+    // If already connected, register immediately
+    if (room.state === ConnectionState.Connected) {
+      console.log('[GameState] Room already connected, registering handler immediately');
+      registerHandler();
     }
 
+    // Also listen for connection state changes
+    const handleConnectionStateChanged = (state: ConnectionState) => {
+      console.log('[GameState] Connection state changed:', state);
+      if (state === ConnectionState.Connected) {
+        registerHandler();
+      }
+    };
+
+    room.on(RoomEvent.ConnectionStateChanged, handleConnectionStateChanged);
+
     return () => {
+      room.off(RoomEvent.ConnectionStateChanged, handleConnectionStateChanged);
       // Cleanup tracking on unmount
+      console.log('[GameState] Cleaning up on unmount');
       isRegisteredRef.current = false;
     };
   }, [room, handleTextStream]);
 
   // Reset game state when disconnected
   useEffect(() => {
+    if (!room) return;
+    
     const handleDisconnected = () => {
+      console.log('[GameState] Room disconnected, resetting state');
       setGameState(initialGameState);
       // Clean up registration tracking when room disconnects
-      if (room) {
-        registeredRooms.delete(room);
-      }
+      registeredRooms.delete(room);
       isRegisteredRef.current = false;
     };
 
-    room?.on('disconnected', handleDisconnected);
+    room.on(RoomEvent.Disconnected, handleDisconnected);
     return () => {
-      room?.off('disconnected', handleDisconnected);
+      room.off(RoomEvent.Disconnected, handleDisconnected);
     };
   }, [room]);
 

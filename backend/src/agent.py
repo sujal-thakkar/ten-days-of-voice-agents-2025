@@ -183,6 +183,10 @@ class ImprovBattleHost(Agent):
             logger.warning("No room reference available to send game state")
             return
         
+        if not self._room.local_participant:
+            logger.warning("No local participant available to send game state")
+            return
+        
         state_data = {
             "type": "game_state",
             "player_name": self.improv_state.player_name,
@@ -195,13 +199,16 @@ class ImprovBattleHost(Agent):
         }
         
         try:
+            logger.info(f"Sending game state update: phase={self.improv_state.phase}, round={self.improv_state.current_round}, score={self.improv_state.total_score}, rounds={len(self.improv_state.rounds)}")
+            logger.debug(f"Game state data: {json.dumps(state_data)}")
+            
             await self._room.local_participant.send_text(
                 json.dumps(state_data),
                 topic=GAME_STATE_TOPIC
             )
-            logger.info(f"Sent game state update: phase={self.improv_state.phase}, round={self.improv_state.current_round}")
+            logger.info(f"Successfully sent game state to topic: {GAME_STATE_TOPIC}")
         except Exception as e:
-            logger.error(f"Failed to send game state: {e}")
+            logger.error(f"Failed to send game state: {e}", exc_info=True)
 
     @function_tool
     async def start_next_round(self, context: RunContext) -> str:
